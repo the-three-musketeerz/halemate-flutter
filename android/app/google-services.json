@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "57752068778",
+    "firebase_url": "https://halemate-a5af2.firebaseio.com",
+    "project_id": "halemate-a5af2",
+    "storage_bucket": "halemate-a5af2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57752068778:android:4c594fb13be732e8b766d3",
+        "android_client_info": {
+          "package_name": "com.example.hale_mate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57752068778-i05u9v889btmmjmrp7o014k9b3hmuntg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9BT9IXkxuodfrKChGmvIErfgO38rjRxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57752068778-i05u9v889btmmjmrp7o014k9b3hmuntg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
