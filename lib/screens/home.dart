@@ -44,7 +44,6 @@ void showAlertDialog(BuildContext context) {
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     title: Text("Confirm your case to proceed"),
-    //content: Text("Would you like to continue learning how to use Flutter alerts?"),
     actions: [
       helpBtn,
       reportBtn,

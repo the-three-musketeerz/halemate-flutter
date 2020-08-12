@@ -29,6 +29,7 @@ dependencies:
   rxdart: ^0.22.0
   flutter_local_notifications:
   flare_flutter:
+  http: ^0.12.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -60,6 +61,7 @@ flutter:
    - assets/syringe.png
    - assets/syrup.png
    - assets/tablets.png
+   - assets/logo.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

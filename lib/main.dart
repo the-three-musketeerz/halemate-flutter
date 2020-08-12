@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hale_mate/screens/alarm/alarm.dart';
 import 'package:hale_mate/screens/alarm/globalBloc.dart';
+import 'package:hale_mate/screens/help.dart';
 import 'package:hale_mate/screens/home.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
@@ -43,7 +44,7 @@ class _HaleMateAppState extends State<HaleMateApp> {
                           Tab(icon: Icon(Icons.local_hospital), text: 'appointment'),
                           Tab(icon: Icon(Icons.alarm), text: 'Alarm'),
                           Tab(icon: Icon(Icons.account_circle), text: 'Profile',),
-                          Tab(icon: Icon(Icons.info), text: 'FAQ'),
+                          Tab(icon: Icon(Icons.info), text: 'Help'),
                         ],
                         indicatorColor: Colors.white,
                       ),
@@ -56,7 +57,7 @@ class _HaleMateAppState extends State<HaleMateApp> {
                           Icon(Icons.local_hospital),
                           MedReminder(),
                           Icon(Icons.account_circle),
-                          Icon(Icons.info),
+                          helpListView(context),
                         ],  ))
                 ],
               )
