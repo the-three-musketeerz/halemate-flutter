@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hale_mate/screens/alarm/globalBloc.dart';
+import 'package:hale_mate/Services/Alarm/globalBloc.dart';
 import 'package:hale_mate/models/reminder/medicine.dart';
 import 'package:hale_mate/screens/alarm/alarmDetails.dart';
 import 'package:hale_mate/screens/alarm/createAlarm.dart';
 import 'package:provider/provider.dart';
+import 'package:hale_mate/Colors.dart';
+
 
 class AlarmHomeScreen extends StatefulWidget {
   @override
@@ -38,7 +40,7 @@ class _AlarmHomeScreenState extends State<AlarmHomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 4,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: colorDark,
         child: Icon(
           Icons.add,
         ),
@@ -123,12 +125,12 @@ class MedicineCard extends StatelessWidget {
   MedicineCard(this.medicine);
 
   Hero makeIcon(double size) {
-    if (medicine.medicineType == "Bottle") {
+    if (medicine.medicineType == "BotLight,tle") {
       return Hero(
         tag: medicine.medicineName + medicine.medicineType,
         child: ImageIcon(
           AssetImage('assets/syrup.png'),
-          color: Colors.deepPurple,
+          color: colorLight,
           size: size,
         ),
       );
@@ -137,7 +139,7 @@ class MedicineCard extends StatelessWidget {
         tag: medicine.medicineName + medicine.medicineType,
         child: ImageIcon(
           AssetImage('assets/pills.png'),
-          color: Colors.deepPurple,
+          color: colorLight,
           size: size,
         ),
       );
@@ -146,7 +148,7 @@ class MedicineCard extends StatelessWidget {
         tag: medicine.medicineName + medicine.medicineType,
         child: ImageIcon(
           AssetImage('assets/syringe.png'),
-          color: Colors.deepPurple,
+          color: colorLight,
           size: size,
         ),
       );
@@ -155,7 +157,7 @@ class MedicineCard extends StatelessWidget {
         tag: medicine.medicineName + medicine.medicineType,
         child: ImageIcon(
           AssetImage('assets/tablets.png'),
-          color: Colors.deepPurple,
+          color: colorLight,
           size: size,
         ),
       );
@@ -164,7 +166,7 @@ class MedicineCard extends StatelessWidget {
       tag: medicine.medicineName + medicine.medicineType,
       child: Icon(
         Icons.error,
-        color: Colors.deepPurple,
+        color: Colors.red[400],
         size: size,
       ),
     );
@@ -213,7 +215,7 @@ class MedicineCard extends StatelessWidget {
                       medicine.medicineName,
                       style: TextStyle(
                           fontSize: 22,
-                          color: Colors.deepPurpleAccent,
+                          color: colorDark,
                           fontWeight: FontWeight.w500),
                     ),
                   ),

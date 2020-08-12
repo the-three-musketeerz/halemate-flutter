@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hale_mate/Services/Authenticate/authProvider.dart';
+import 'package:hale_mate/screens/Authenticate/login.dart';
 import 'package:hale_mate/screens/alarm/alarm.dart';
-import 'package:hale_mate/screens/alarm/globalBloc.dart';
+import 'package:hale_mate/Services/Alarm/globalBloc.dart';
 import 'package:hale_mate/screens/help.dart';
 import 'package:hale_mate/screens/home.dart';
+import 'package:hale_mate/utlis/router.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   runApp(HaleMateApp());
@@ -24,11 +27,16 @@ class _HaleMateAppState extends State<HaleMateApp> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return MaterialApp(
+    const color = const Color(0xff30bfbf);
+    //final AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    return ChangeNotifierProvider(
+        builder: (context) => AuthProvider(),
+      child: MaterialApp(
+        onGenerateRoute: Router.generateRoute,
       home: Scaffold(
           appBar: AppBar(
             title: Text('HaleMate'),
-            backgroundColor: Colors.deepPurpleAccent,
+            backgroundColor: Color(0xff008c8c),
           ),
           body: DefaultTabController(
               length: 5,
@@ -37,7 +45,7 @@ class _HaleMateAppState extends State<HaleMateApp> {
                   Container(
                     constraints: BoxConstraints(maxHeight: 70.0),
                     child: Material(
-                     color: Colors.deepPurpleAccent[400],
+                     color: color,
                       child: TabBar(
                         tabs: [
                           Tab(icon: Icon(Icons.home), text: "Home"),
@@ -56,7 +64,7 @@ class _HaleMateAppState extends State<HaleMateApp> {
                           HomeScreen(),
                           Icon(Icons.local_hospital),
                           MedReminder(),
-                          Icon(Icons.account_circle),
+                          LogInForm(),
                           helpListView(context),
                         ],  ))
                 ],
@@ -65,8 +73,7 @@ class _HaleMateAppState extends State<HaleMateApp> {
 
           ),
         ),
-      );
-
+      ));
   }
 }
 

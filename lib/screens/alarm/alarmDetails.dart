@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hale_mate/models/reminder/medicine.dart';
 import 'package:provider/provider.dart';
-import 'package:hale_mate/screens/alarm/globalBloc.dart';
+import 'package:hale_mate/Services/Alarm/globalBloc.dart';
+import 'package:hale_mate/Colors.dart';
 
 class MedicineDetails extends StatelessWidget {
   final Medicine medicine;
@@ -39,7 +40,7 @@ class MedicineDetails extends StatelessWidget {
                 child: Container(
                   height: 50,
                   child: RaisedButton(
-                    color: Colors.deepPurpleAccent[400],
+                    color: colorDark,
 
 
                     onPressed: () {
@@ -126,7 +127,7 @@ class MedicineDetails extends StatelessWidget {
                             child: Text(
                               "No",
                               style: TextStyle(
-                                color: Colors.deepPurpleAccent,
+                                color: colorDark,
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
@@ -160,7 +161,7 @@ class MainSection extends StatelessWidget {
         tag: medicine.medicineName + medicine.medicineType,
         child: ImageIcon(
           AssetImage('assets/syrup.png'),
-          color: Colors.deepPurple,
+          color: colorDark,
           size: size,
         ),
       );
@@ -169,7 +170,7 @@ class MainSection extends StatelessWidget {
         tag: medicine.medicineName + medicine.medicineType,
         child: ImageIcon(
           AssetImage('assets/pills.png'),
-          color: Colors.deepPurple,
+          color: colorDark,
           size: size,
         ),
       );
@@ -178,7 +179,7 @@ class MainSection extends StatelessWidget {
         tag: medicine.medicineName + medicine.medicineType,
         child: ImageIcon(
           AssetImage('assets/syringe.png'),
-          color: Colors.deepPurple,
+          color: colorDark,
           size: size,
         ),
       );
@@ -187,7 +188,7 @@ class MainSection extends StatelessWidget {
         tag: medicine.medicineName + medicine.medicineType,
         child: ImageIcon(
           AssetImage('assets/tablets.png'),
-          color: Colors.deepPurple,
+          color: colorDark,
           size: size,
         ),
       );
@@ -196,7 +197,7 @@ class MainSection extends StatelessWidget {
       tag: medicine.medicineName + medicine.medicineType,
       child: Icon(
         Icons.local_hospital,
-        color: Colors.deepPurple,
+        color: colorLight,
         size: size,
       ),
     );
@@ -263,7 +264,7 @@ class MainInfoTab extends StatelessWidget {
             fieldInfo,
             style: TextStyle(
                 fontSize: 24,
-                color: Colors.deepPurpleAccent,
+                color: colorLight,
                 fontWeight: FontWeight.bold),
           ),
         ],

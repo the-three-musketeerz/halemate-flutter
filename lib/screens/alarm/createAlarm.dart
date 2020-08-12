@@ -1,11 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:hale_mate/Colors.dart';
 import 'package:hale_mate/models/reminder/medicine.dart';
-import 'package:hale_mate/screens/alarm/globalBloc.dart';
+import 'package:hale_mate/Services/Alarm/globalBloc.dart';
 import 'package:hale_mate/models/reminder/Enum.dart';
 import 'dart:developer' as developer;
 import 'package:hale_mate/screens/alarm/alarm.dart';
-import 'package:hale_mate/screens/alarm/createAlarmBlock.dart';
+import 'package:hale_mate/Services/Alarm/createAlarmBlock.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -159,10 +160,10 @@ class _NewEntryState extends State<NewEntry> {
                       height: 50.0,
                       child: SizedBox.expand(
                           child: RaisedButton(
-                            color: Colors.deepPurple,
+                            color: colorDark,
                             child: Center(
                               child: Text(
-                                "Confirm",
+                                "Set Reminder",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 24,
@@ -397,7 +398,7 @@ class _IntervalSelectionState extends State<IntervalSelection> {
   @override
   Widget build(BuildContext context) {
     final NewEntryBloc _newEntryBloc = Provider.of<NewEntryBloc>(context);
-    return Padding(
+    return Container(
       padding: EdgeInsets.only(top: 8.0),
       child: Container(
         child: Row(
@@ -414,7 +415,7 @@ class _IntervalSelectionState extends State<IntervalSelection> {
               ),
             )),
             DropdownButton<int>(
-              iconEnabledColor: Colors.deepPurple,
+              iconEnabledColor: Colors.black,
               hint: _selected == 0
                   ? Text(
                 "Select an Interval",
@@ -496,7 +497,7 @@ class _SelectTimeState extends State<SelectTime> {
       child: Padding(
         padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
         child: FlatButton(
-          color: Colors.deepPurpleAccent[100],
+          color: colorLight,
           shape: StadiumBorder(),
           onPressed: () {
             _selectTime(context);
@@ -546,7 +547,7 @@ class MedicineTypeColumn extends StatelessWidget {
             width: 85,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: isSelected ? Colors.deepPurple : Colors.white,
+              color: isSelected ? colorLight : Colors.white,
             ),
             child: Center(
               child: Padding(
@@ -554,7 +555,7 @@ class MedicineTypeColumn extends StatelessWidget {
                 child: ImageIcon(
                   AssetImage(source),
                   size: 75,
-                  color: isSelected ? Colors.white : Colors.deepPurple,
+                  color: isSelected ? Colors.white : colorLight,
                 ),
               ),
             ),
@@ -565,7 +566,7 @@ class MedicineTypeColumn extends StatelessWidget {
               width: 80,
               height: 30,
               decoration: BoxDecoration(
-                color: isSelected ? Colors.deepPurple : Colors.transparent,
+                color: isSelected ? colorLight : Colors.transparent,
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Center(
@@ -573,7 +574,7 @@ class MedicineTypeColumn extends StatelessWidget {
                   name,
                   style: TextStyle(
                     fontSize: 16,
-                    color: isSelected ? Colors.white : Colors.deepPurple,
+                    color: isSelected ? Colors.white : colorDark,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -608,7 +609,7 @@ class PanelTitle extends StatelessWidget {
           ),
           TextSpan(
             text: isRequired ? " *" : "",
-            style: TextStyle(fontSize: 14, color: Colors.deepPurple),
+            style: TextStyle(fontSize: 14, color: colorLight),
           ),
         ]),
       ),
