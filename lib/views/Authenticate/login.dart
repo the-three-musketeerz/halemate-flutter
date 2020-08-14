@@ -2,10 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Colors.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/screens/Authenticate/passwordReset.dart';
-import 'package:hale_mate/screens/Authenticate/signup.dart';
-import 'package:hale_mate/screens/Authenticate/widgets/AuthStatus.dart';
-import 'package:hale_mate/screens/Authenticate/widgets/AuthStyles.dart';
+import 'package:hale_mate/views/Authenticate/passwordReset.dart';
+import 'package:hale_mate/views/Authenticate/signup.dart';
+import 'package:hale_mate/views/Authenticate/widgets/AuthStatus.dart';
+import 'package:hale_mate/views/Authenticate/widgets/AuthStyles.dart';
 import 'package:hale_mate/utlis/validator.dart';
 import 'package:provider/provider.dart';
 
@@ -79,7 +79,7 @@ class LogInFormState extends State<LogInForm> {
                           SizedBox(height: 15.0),
                           StyledButton(
                             'Sign In',
-                            onPressed: submit,
+                            onPressed: submit(),
                           ),
                           SizedBox(height: 25.0),
                           Center(

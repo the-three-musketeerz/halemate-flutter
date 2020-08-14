@@ -5,7 +5,7 @@ import 'package:hale_mate/models/reminder/medicine.dart';
 import 'package:hale_mate/Services/Alarm/globalBloc.dart';
 import 'package:hale_mate/models/reminder/Enum.dart';
 import 'dart:developer' as developer;
-import 'package:hale_mate/screens/alarm/alarm.dart';
+import 'package:hale_mate/views/alarm/alarm.dart';
 import 'package:hale_mate/Services/Alarm/createAlarmBlock.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';

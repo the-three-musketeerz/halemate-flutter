@@ -1,3 +1,5 @@
+import 'dart:core';
+import 'package:hale_mate/Services/alertService.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,45 +25,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Icon(Icons.warning),
                   backgroundColor: Colors.red[500],
                   onPressed: () {
-                    showAlertDialog(context);
+                   Navigator.pushNamed(context, AlertWidget.id);
                   }),
             )
         )
     );
   }
+
+
+
+
 }
 
-void showAlertDialog(BuildContext context) {
-  // set up the buttons
-  Widget helpBtn = FlatButton(
-    child: Text("I need Help"),
-    onPressed:  () {
-      Navigator.pop(context);
-    },
-  );
-  Widget reportBtn = FlatButton(
-    child: Text("Report a Medical Emergency"),
-    onPressed:  () {
-      Navigator.pop(context);
-    },
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text("Confirm your case to proceed"),
-    actions: [
-      helpBtn,
-      reportBtn,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
-}
 
 

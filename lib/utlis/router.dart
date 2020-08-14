@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hale_mate/screens/Authenticate/login.dart';
-import 'package:hale_mate/screens/Authenticate/passwordReset.dart';
-import 'package:hale_mate/screens/Authenticate/signup.dart';
-import 'package:hale_mate/screens/home.dart';
+import 'package:hale_mate/Services/alertService.dart';
+import 'package:hale_mate/views//Authenticate/login.dart';
+import 'package:hale_mate/views/Authenticate/passwordReset.dart';
+import 'package:hale_mate/views/Authenticate/signup.dart';
+import 'package:hale_mate/views/home.dart';
 
 
 class Router {
@@ -16,6 +17,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => LogInForm());
       case PasswordResetForm.id:
         return MaterialPageRoute(builder: (_) => PasswordResetForm());
+      case AlertWidget.id:
+        return MaterialPageRoute(builder: (_) => AlertWidget());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

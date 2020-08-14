@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/screens/Authenticate/widgets/AuthStyles.dart';
 import 'package:hale_mate/utlis/validator.dart';
+import 'package:hale_mate/views/Authenticate/widgets/AuthStyles.dart';
 import 'package:provider/provider.dart';
 
 
@@ -24,6 +24,7 @@ class RegisterFormState extends State<RegisterForm> {
   String message = '';
 
   Map response = new Map();
+
 
 
   Future<void> submit() async {
@@ -121,8 +122,11 @@ class RegisterFormState extends State<RegisterForm> {
           TextFormField(
               obscureText: true,
               decoration: AuthStyles.input.copyWith(
-                hintText: 'Phone Number',
+                hintText: 'Enter Phone Number Eg. +910000000000',
               ),
+              onChanged: (value) {
+                this.phone = value;
+              },
               validator: (value) {
                 phone = value.trim();
                 return Validate.requiredField(value, 'Phone Number is required.');
@@ -131,7 +135,9 @@ class RegisterFormState extends State<RegisterForm> {
           SizedBox(height: 20.0),
           StyledButton(
             'Register',
-            onPressed: submit,
+            onPressed: {
+              submit()
+            },
           ),
         ],
       ),

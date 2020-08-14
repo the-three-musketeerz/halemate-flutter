@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "57752068778-h9qeaenviecq7njdp0v4pplndt1ekrkb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hale_mate",
+            "certificate_hash": "4808c9ead9f340bbbbf1d0a66a7d7c1625930a1c"
+          }
+        },
+        {
           "client_id": "57752068778-i05u9v889btmmjmrp7o014k9b3hmuntg.apps.googleusercontent.com",
           "client_type": 3
         }
