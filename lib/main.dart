@@ -4,6 +4,7 @@ import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/views/Authenticate/login.dart';
 import 'package:hale_mate/views/alarm/alarm.dart';
 import 'package:hale_mate/Services/Alarm/globalBloc.dart';
+import 'package:hale_mate/views/appointment.dart';
 import 'package:hale_mate/views/help.dart';
 import 'package:hale_mate/views/home.dart';
 import 'package:hale_mate/utlis/router.dart';
@@ -62,7 +63,7 @@ class _HaleMateAppState extends State<HaleMateApp> {
                       child: TabBarView(
                         children: [
                           HomeScreen(),
-                          Icon(Icons.local_hospital),
+                          AppointmentWidget(),
                           MedReminder(),
                           LogInForm(),
                           HelpListView(),

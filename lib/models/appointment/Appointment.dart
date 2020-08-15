@@ -13,7 +13,7 @@ class Appointment {
   String hospitalName;
   String hospitalPhone;
   int doctorId;
-  int doctorName;
+  String doctorName;
   String reason;
   String status;
   DateTime appointmentTime;
@@ -37,7 +37,7 @@ class Appointment {
   //for decoding data in json format from the server
   factory Appointment.fromJson(Map<String, dynamic> json) => new Appointment(
     id: json['id'],
-    patientName: json['name'],
+    patientName: json['patient_name'],
     hospitalId: json['hospital']['id'],
     hospitalName: json['hospital']['name'],
     hospitalPhone: json['hospital']['phoneNumber'],
@@ -45,7 +45,7 @@ class Appointment {
     doctorName: json['doctor']['name'],
     reason: json['reason'],
     status: json['status'],
-    appointmentTime: DateTime.parse(json['appointment_time']),
+    appointmentTime: (json['appointment_time'] == '')? DateTime.parse(json['appointment_time']) : null,
     appointmentMadeTime: DateTime.parse(json['appointment_made_time']),
   );
 

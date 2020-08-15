@@ -14,5 +14,5 @@ const String signupVerifyAPI = '$baseAPI/signup_verify/';
 const String otpVerifyAPI = '$baseAPI/otp_verify/';
 const String otpRefreshAPI = '$baseAPI/otp_refresh/';
 const String logoutAPI = '$baseAPI/logout/';
-
+const String appointmentAPI = '$baseAPI/appointment/';
 
