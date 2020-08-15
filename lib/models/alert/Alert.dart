@@ -20,7 +20,7 @@ class Alert{
   );
 
   Map<String, dynamic> toJson() => {
-    "latitude": location.latitude,
-    "longitude": location.longitude,
+    "lat": location.latitude,
+    "lng": location.longitude,
   };
 }

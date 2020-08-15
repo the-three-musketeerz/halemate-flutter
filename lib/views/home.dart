@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Icon(Icons.warning),
                   backgroundColor: Colors.red[500],
                   onPressed: () {
-                   Navigator.pushNamed(context, AlertWidget.id);
+                   Navigator.pushReplacementNamed(context, AlertWidget.id);
                   }),
             )
         )

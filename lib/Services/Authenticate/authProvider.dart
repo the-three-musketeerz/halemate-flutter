@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:hale_mate/constanst.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStatus.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +18,6 @@ class AuthProvider with ChangeNotifier {
   String get token => _token;
   AuthStatusText get notification => _notification;
 
-  final String api = '';
 
   initAuthProvider() async {
     String token = await getToken();
@@ -35,10 +35,10 @@ class AuthProvider with ChangeNotifier {
     _notification = null;
     notifyListeners();
 
-    final url = "$api/login";
+    final url = loginAPI;
 
     Map<String, String> body = {
-      'email': email,
+      'username': email,
       'password': password,
     };
 
@@ -47,7 +47,8 @@ class AuthProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       Map<String, dynamic> apiResponse = json.decode(response.body);
       _status = Status.Authenticated;
-      _token = apiResponse['access_token'];
+      _token = apiResponse['token'];
+      print(_token);
       await storeUserData(apiResponse);
       notifyListeners();
       return true;
@@ -67,60 +68,64 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<Map> register(String name, String email, String password, String passwordConfirm, String phone) async {
-    final url = "$api/register";
+    final url = signupAPI;
 
-    Map<String, String> body = {
-      'name': name,
-      'email': email,
-      'password': password,
-      'password_confirmation': passwordConfirm,
-      'phone': phone
-    };
+    {
 
-    Map<String, dynamic> result = {
-      "success": false,
-      "message": 'Unknown error.'
-    };
+      Map<String, String> body = {
+        'name': name,
+        'email': email,
+        'password': password,
+        'phoneNumber': phone,
+        'registered_as': "U"
+      };
 
-    final response = await http.post( url, body: body, );
+      Map<String, dynamic> result = {
+        "success": false,
+        "message": 'Unknown error.'
+      };
 
-    if (response.statusCode == 200) {
-      _notification = AuthStatusText('Registration successful, please log in.', type: 'info');
-      notifyListeners();
-      result['success'] = true;
-      return result;
-    }
+      final response = await http.post(url, body: body,);
 
-    Map apiResponse = json.decode(response.body);
-
-    if (response.statusCode == 422) {
-      if (apiResponse['errors'].containsKey('email')) {
-        result['message'] = apiResponse['errors']['email'][0];
+      if (response.statusCode == 200) {
+        _notification = AuthStatusText(
+            'Registration successful, please log in.', type: 'info');
+        notifyListeners();
+        result['success'] = true;
         return result;
       }
 
-      if (apiResponse['errors'].containsKey('password')) {
-        result['message'] = apiResponse['errors']['password'][0];
+      Map apiResponse = json.decode(response.body);
+
+      if (response.statusCode == 422) {
+        if (apiResponse['errors'].containsKey('email')) {
+          result['message'] = apiResponse['errors']['email'][0];
+          return result;
+        }
+
+        if (apiResponse['errors'].containsKey('password')) {
+          result['message'] = apiResponse['errors']['password'][0];
+          return result;
+        }
+
         return result;
       }
 
       return result;
     }
-
-    return result;
   }
 
   Future<bool> passwordReset(String email) async {
-    final url = "$api/forgot-password";
+    final url = forgotPasswordAPI;
 
     Map<String, String> body = {
-      'email': email,
+      'email': email
     };
 
     final response = await http.post( url, body: body, );
 
     if (response.statusCode == 200) {
-      _notification = AuthStatusText('Reset sent. Please check your inbox.', type: 'info');
+      _notification = AuthStatusText('Email sent for password reset. Please check your inbox.', type: 'info');
       notifyListeners();
       return true;
     }
@@ -130,8 +135,7 @@ class AuthProvider with ChangeNotifier {
 
   storeUserData(apiResponse) async {
     SharedPreferences storage = await SharedPreferences.getInstance();
-    await storage.setString('token', apiResponse['access_token']);
-    await storage.setString('name', apiResponse['user']['name']);
+    await storage.setString('token', apiResponse['token']);
   }
 
   Future<String> getToken() async {

@@ -65,7 +65,7 @@ class _HaleMateAppState extends State<HaleMateApp> {
                           Icon(Icons.local_hospital),
                           MedReminder(),
                           LogInForm(),
-                          helpListView(context),
+                          HelpListView(),
                         ],  ))
                 ],
               )

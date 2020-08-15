@@ -1,12 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hale_mate/Colors.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
+import 'package:hale_mate/constanst.dart';
+import 'package:hale_mate/utlis/validator.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStatus.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStyles.dart';
-import 'package:hale_mate/utlis/validator.dart';
+import 'package:hale_mate/views/help.dart';
 import 'package:provider/provider.dart';
 
 class LogInForm extends StatefulWidget {
@@ -28,6 +29,7 @@ class LogInFormState extends State<LogInForm> {
     final form = _formKey.currentState;
     if (form.validate()) {
       await Provider.of<AuthProvider>(context).login(email, password);
+      Navigator.pushNamed(context, HelpListView.id);
     }
   }
 
@@ -57,7 +59,6 @@ class LogInFormState extends State<LogInForm> {
                           ),
                           SizedBox(height: 30.0),
                           TextFormField(
-                              textCapitalization: TextCapitalization.characters,
                               decoration: AuthStyles.input.copyWith(
                                 hintText: 'Email',
                               ),
@@ -77,9 +78,9 @@ class LogInFormState extends State<LogInForm> {
                                     value, 'Password is required.');
                               }),
                           SizedBox(height: 15.0),
-                          StyledButton(
-                            'Sign In',
-                            onPressed: submit(),
+                          FlatButton(
+                            child: Text('Sign In'),
+                            onPressed: submit,
                           ),
                           SizedBox(height: 25.0),
                           Center(

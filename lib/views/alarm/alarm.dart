@@ -4,7 +4,7 @@ import 'package:hale_mate/models/reminder/medicine.dart';
 import 'package:hale_mate/views/alarm/alarmDetails.dart';
 import 'package:hale_mate/views/alarm/createAlarm.dart';
 import 'package:provider/provider.dart';
-import 'package:hale_mate/Colors.dart';
+import 'package:hale_mate/constanst.dart';
 
 
 class AlarmHomeScreen extends StatefulWidget {

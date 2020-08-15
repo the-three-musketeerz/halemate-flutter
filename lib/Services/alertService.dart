@@ -1,11 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-
-
 
 
 class AlertWidget extends StatefulWidget {
@@ -19,11 +16,15 @@ class AlertWidget extends StatefulWidget {
 class _AlertWidgetState extends State<AlertWidget> {
 
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
-  Position _currentPosition;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return FlatButton(
+        child: Text("Send alert"),
+        onPressed: (){
+          showAlertDialog(context);
+        }
+    );
   }
 
   _getCurrentLocation() {
@@ -34,26 +35,28 @@ class _AlertWidgetState extends State<AlertWidget> {
         .then((Position position) async {
       if (position != null) {
         print("Location: ${position.latitude},${position.longitude}");
-        setState(() {
+        /*setState(() {
           _currentPosition = position;
-          postLocation(_currentPosition.latitude, _currentPosition.longitude);
-        });
+        });*/
+        postLocation(position.latitude, position.longitude);
       }
     }).catchError((e) {
       print(e);
     });
   }
 
-  Future<http.Response> postLocation(dynamic lat, dynamic long) async {
+  Future<http.Response> postLocation(double lat, double long) async {
+
+    Map<String, dynamic> body = {
+      'lat': lat,
+      'lng': long
+    };
     final http.Response response = await http.post(
-      'http://65fe8c36a7f4.ngrok.io/halemate/alert',
+      'http://40888d127c7a.ngrok.io/halemate/alert/',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, dynamic>{
-        'latitude': lat,
-        'longitude': long,
-      }),
+      body: body
     );
 
     if (response.statusCode == 201) {
@@ -65,7 +68,7 @@ class _AlertWidgetState extends State<AlertWidget> {
 
   }
 
-  void showAlertDialog(BuildContext context) {
+  showAlertDialog(BuildContext context) {
 
     // set up the buttons
     Widget helpBtn = FlatButton(
@@ -81,23 +84,23 @@ class _AlertWidgetState extends State<AlertWidget> {
       },
     );
 
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Confirm your case to proceed"),
-      actions: [
-        helpBtn,
-        reportBtn,
-      ],
-    );
+      // set up the AlertDialog
+      AlertDialog alert = AlertDialog(
+        title: Text("Confirm your case to proceed"),
+        actions: [
+          helpBtn,
+          reportBtn,
+        ],
+      );
 
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
+      // show the dialog
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+    }
 
 
 }

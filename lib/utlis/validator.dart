@@ -37,4 +37,16 @@ class Validate {
     return null;
   }
 
+  static String passwordMatch(String value1, String value2){
+    String passwordConfirm  = value1.trim();
+    String password = value2.trim();
+    if(password.isEmpty || passwordConfirm.isEmpty){
+      return 'Please enter the password correctly';
+    }
+    if (password!= passwordConfirm){
+      return 'Passwords do not match. Please re-enter the passwords';
+    }
+    return null;
+  }
+
 }

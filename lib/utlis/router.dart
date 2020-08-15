@@ -3,6 +3,7 @@ import 'package:hale_mate/Services/alertService.dart';
 import 'package:hale_mate/views//Authenticate/login.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
+import 'package:hale_mate/views/help.dart';
 import 'package:hale_mate/views/home.dart';
 
 
@@ -19,6 +20,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => PasswordResetForm());
       case AlertWidget.id:
         return MaterialPageRoute(builder: (_) => AlertWidget());
+      case HelpListView.id:
+        return MaterialPageRoute(builder: (_) => HelpListView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
