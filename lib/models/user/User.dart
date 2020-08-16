@@ -6,3 +6,10 @@ class User {
 
   User({ this.email, this.name, this.phone, this.token });
 }
+
+class PassedData{
+  String Email;
+  String Phone;
+
+  PassedData(this.Email, this.Phone);
+}

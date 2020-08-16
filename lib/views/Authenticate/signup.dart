@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/utlis/validator.dart';
-import 'package:hale_mate/views/Authenticate/login.dart';
+import 'package:hale_mate/views/Authenticate/otpVerify.dart';
+import 'package:hale_mate/views/Authenticate/widgets/AuthStatus.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStyles.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +15,11 @@ class RegisterForm extends StatefulWidget {
   RegisterFormState createState() => RegisterFormState();
 }
 
+
+
 class RegisterFormState extends State<RegisterForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _obscureText = true;
 
   String name;
   String email;
@@ -22,8 +27,15 @@ class RegisterFormState extends State<RegisterForm> {
   String passwordConfirm;
   String phone;
   String message = '';
+  TextEditingController _controller = new TextEditingController();
 
   Map response = new Map();
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   Future<void> submit() async {
     final form = _formKey.currentState;
@@ -31,7 +43,13 @@ class RegisterFormState extends State<RegisterForm> {
       response = await Provider.of<AuthProvider>(context)
           .register(name, email, password, passwordConfirm, phone);
       if (response['success']) {
-        Navigator.pushNamed(context, LogInForm.id);
+        var route = new MaterialPageRoute(
+          builder: (BuildContext context) =>
+          new OTPVerificationScreen(emailValue: _controller.text),
+        );
+        Navigator.of(context).push(route);
+        print(email);
+        print(phone);
       } else {
         setState(() {
           message = response['message'];
@@ -45,21 +63,12 @@ class RegisterFormState extends State<RegisterForm> {
     return Material(
         child: SingleChildScrollView(
             child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 40.0),
-                margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 50.0),
-                child: Card(
-                    semanticContainer: true,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 5,
-                    margin: EdgeInsets.all(10),
-                    child: Padding(
-                        padding: EdgeInsets.all(10.0),
+                margin: EdgeInsets.all(15.0),
                         child: Form(
                           key: _formKey,
-                          child: Column(
+                          child: Center(
+                            heightFactor: 1.5,
+                            child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -69,15 +78,21 @@ class RegisterFormState extends State<RegisterForm> {
                                 style: AuthStyles.h1,
                               ),
                               SizedBox(height: 10.0),
+                              Consumer<AuthProvider>(
+                                builder: (context, provider, child) =>
+                                provider.notification ?? AuthStatusText(''),
+                              ),
+                              SizedBox(height: 10.0),
                               Text(
                                 message,
                                 textAlign: TextAlign.center,
                                 style: AuthStyles.error,
                               ),
-                              SizedBox(height: 30.0),
+                              SizedBox(height: 10.0),
                               TextFormField(
                                   decoration: AuthStyles.input.copyWith(
                                     hintText: 'Name',
+                                    icon: Icon(Icons.account_circle),
                                   ),
                                   validator: (value) {
                                     name = value.trim();
@@ -88,17 +103,40 @@ class RegisterFormState extends State<RegisterForm> {
                               TextFormField(
                                   decoration: AuthStyles.input.copyWith(
                                     hintText: 'Email',
+                                    icon: Icon(Icons.email),
                                   ),
+                                  controller: _controller,
                                   validator: (value) {
                                     email = value.trim();
                                     return Validate.validateEmail(value);
                                   }),
                               SizedBox(height: 15.0),
                               TextFormField(
-                                  obscureText: true,
+                                  obscureText: _obscureText,
                                   decoration: AuthStyles.input.copyWith(
+                                     /* border: OutlineInputBorder(
+                                        gapPadding: 1.0,
+                                        borderSide: BorderSide(
+                                          color: Colors.grey[600],
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: colorLight,
+                                          width: 2.0,
+                                        ),
+                                      ),*/
                                     hintText: 'Password',
-                                  ),
+                                    icon: Container(
+                                      width: 15.0,
+                                        margin: EdgeInsets.only(right: 10.0),
+                                        child: IconButton(
+                                        onPressed: (){
+                                          _toggle();
+                                        },
+                                        icon: Icon(Icons.remove_red_eye))
+                                  )),
                                   validator: (value) {
                                     AuthStyles.p
                                         .copyWith(color: Colors.blue[500]);
@@ -108,10 +146,20 @@ class RegisterFormState extends State<RegisterForm> {
                                   }),
                               SizedBox(height: 15.0),
                               TextFormField(
-                                  obscureText: true,
+                                  obscureText:  _obscureText,
                                   decoration: AuthStyles.input.copyWith(
                                     hintText: 'Confirm Password ',
-                                  ),
+                                      icon: Container(
+                                          width: 15.0,
+                                          margin: EdgeInsets.only(right: 10.0),
+                                          child: IconButton(
+                                          onPressed: ()
+                                          {
+                                            _toggle();
+                                          },
+                                          icon: Icon(Icons.remove_red_eye))
+                                  )),
+
                                   validator: (value) {
                                     passwordConfirm = value.trim();
 
@@ -121,11 +169,12 @@ class RegisterFormState extends State<RegisterForm> {
                                   ),
                               SizedBox(height: 15.0),
                               TextFormField(
-                                  obscureText: true,
                                   decoration: AuthStyles.input.copyWith(
                                     hintText:
                                         'Enter Phone Number Eg. +910000000000',
+                                    icon: Icon(Icons.phone),
                                   ),
+
                                   keyboardType:
                                       TextInputType.numberWithOptions(),
                                   onChanged: (value) {
@@ -133,17 +182,24 @@ class RegisterFormState extends State<RegisterForm> {
                                   },
                                   validator: (value) {
                                     phone = value.trim();
-                                    return Validate.requiredField(
-                                        value, 'Phone Number is required.');
+                                    return Validate.validatePhone(
+                                        value);
                                   }),
 
                               SizedBox(height: 20.0),
-                              RaisedButton(
-                                child: Text('Register'),
-                                onPressed: submit,
+                              StyledButton(
+                                'Register',
+                                onPressed: (){
+                                  _toggle();
+                                  submit();
+                                },
                               ),
                             ],
                           ),
-                        ))))));
+                        )
+                        )
+            )
+        )
+    );
   }
 }

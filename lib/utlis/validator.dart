@@ -1,3 +1,5 @@
+
+
 class Validate {
 
   // RegEx pattern for validating email addresses.
@@ -45,6 +47,17 @@ class Validate {
     }
     if (password!= passwordConfirm){
       return 'Passwords do not match. Please re-enter the passwords';
+    }
+    return null;
+  }
+
+  static String validatePhone(String value){
+    String phone = value.trim();
+    if (phone.isEmpty) {
+      return "Phone Number is required.";
+    }
+    if (phone.length!= 10) {
+      return 'Invalid Phone Number';
     }
     return null;
   }

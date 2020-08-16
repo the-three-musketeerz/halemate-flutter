@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/constanst.dart';
+import 'package:hale_mate/constants.dart';
 import 'package:hale_mate/utlis/validator.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
@@ -78,8 +78,8 @@ class LogInFormState extends State<LogInForm> {
                                     value, 'Password is required.');
                               }),
                           SizedBox(height: 15.0),
-                          FlatButton(
-                            child: Text('Sign In'),
+                          StyledButton(
+                            'Login',
                             onPressed: submit,
                           ),
                           SizedBox(height: 25.0),
@@ -114,7 +114,7 @@ class LogInFormState extends State<LogInForm> {
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () => {
                                           Navigator.pushNamed(
-                                              context, PasswordResetForm.id),
+                                              context, ForgotPasswordForm.id),
                                         }),
                             ),
                           ),

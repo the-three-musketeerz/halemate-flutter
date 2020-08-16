@@ -64,7 +64,9 @@ import 'package:hale_mate/models/help/helpData.dart';
                                  );
                                });
                          }),
-                   )));
+                   )
+               )
+           );
          });
    }
 
