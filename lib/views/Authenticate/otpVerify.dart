@@ -22,7 +22,6 @@ class OTPVerificationScreen extends StatefulWidget {
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   int attemptsLeft = 3;
-  PassedData args;
 
   String method;
   String message = '';

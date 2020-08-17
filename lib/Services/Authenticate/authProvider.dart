@@ -254,6 +254,7 @@ class AuthProvider with ChangeNotifier {
   Future<String> getToken() async {
     SharedPreferences storage = await SharedPreferences.getInstance();
     String token = storage.getString('token');
+    _token = token;
     return token;
   }
 

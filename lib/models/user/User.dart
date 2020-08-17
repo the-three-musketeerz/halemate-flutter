@@ -4,12 +4,6 @@ class User {
   final String phone;
   final String token;
 
+
   User({ this.email, this.name, this.phone, this.token });
-}
-
-class PassedData{
-  String Email;
-  String Phone;
-
-  PassedData(this.Email, this.Phone);
 }

@@ -26,11 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Icon(Icons.warning),
                   backgroundColor: Colors.red[500],
                   onPressed: () {
-                    var route = new MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                      new AlertWidget(),
-                    );
-                    Navigator.of(context).push(route);
+                    showDialog(context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) => AlertWidget());
                   }),
             )
         )

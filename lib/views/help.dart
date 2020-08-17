@@ -10,7 +10,8 @@ import 'package:hale_mate/models/help/helpData.dart';
 
    @override
    Widget build(BuildContext context) {
-     return ListView.builder(
+     return Material(
+         child: ListView.builder(
          itemCount: titles.length,
          itemBuilder: (context, index) {
            return Container(
@@ -67,7 +68,8 @@ import 'package:hale_mate/models/help/helpData.dart';
                    )
                )
            );
-         });
+         })
+     );
    }
 
 

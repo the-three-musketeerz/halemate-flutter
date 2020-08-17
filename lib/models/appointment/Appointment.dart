@@ -7,47 +7,53 @@ String appointmentToJson(List<Appointment> data) =>
     json.encode(new List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Appointment {
-  String id;
-  String userID;
-  String name;
-  String hospital;
-  String doctor;
+  int id;
+  String patientName;
+  int hospitalId;
+  String hospitalName;
+  String hospitalPhone;
+  int doctorId;
+  String doctorName;
   String reason;
-  int status;
-  DateTime time;
+  String status;
+  dynamic appointmentTime;
+  DateTime appointmentMadeTime;
 
   Appointment(
-      {this.id,
-      this.userID,
-      this.name,
-      this.hospital,
-      this.doctor,
-      this.reason,
-      this.status,
-      this.time
+      {
+        this.id,
+        this.patientName,
+        this.hospitalId,
+        this.hospitalName,
+        this.hospitalPhone,
+        this.doctorId,
+        this.doctorName,
+        this.reason,
+        this.status,
+        this.appointmentTime,
+        this.appointmentMadeTime
       });
 
   //for decoding data in json format from the server
   factory Appointment.fromJson(Map<String, dynamic> json) => new Appointment(
-        id: json['appointmentId'],
-        userID: json['uid'],
-        name: json['name'],
-        hospital: json['hospital'],
-        doctor: json['doctor'],
-        reason: json['reason'],
-        status: json['status'],
-        time: DateTime.parse(json['time']),
-      );
+    id: json['id'],
+    patientName: json['patient_name'],
+    hospitalId: json['hospital']['id'],
+    hospitalName: json['hospital']['name'],
+    hospitalPhone: json['hospital']['phoneNumber'],
+    doctorId: json['doctor']['id'],
+    doctorName: json['doctor']['name'],
+    reason: json['reason'],
+    status: json['status'],
+    appointmentTime: (json['appointment_time'] != null)? DateTime.parse(json['appointment_time']) : '',
+    appointmentMadeTime: DateTime.parse(json['appointment_made_time']),
+  );
 
   //encoding data into a json object to be sent to the server
   Map<String, dynamic> toJson() => {
-        "appointmentId": id,
-        "uid": userID,
-        "name": name,
-        "hospital": hospital,
-        "doctor": doctor,
-        "reason": reason,
-      //  "status": status,
-      //  "time": time.toIso8601String(),
-      };
+    "patient_name": patientName,
+    "hospital": hospitalId,
+    "doctor": doctorId,
+    "reason": reason,
+  };
 }
