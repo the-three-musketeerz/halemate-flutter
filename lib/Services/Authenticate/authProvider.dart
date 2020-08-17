@@ -7,19 +7,19 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
-enum OTPmethod{viaEmail, viaPhone}
+
 
 class AuthProvider with ChangeNotifier {
 
   Status _status = Status.Uninitialized;
   String _token;
   AuthStatusText _notification;
-  OTPmethod _method = OTPmethod.viaEmail;
+
 
   Status get status => _status;
   String get token => _token;
   AuthStatusText get notification => _notification;
-  OTPmethod get method => _method;
+
 
 
   initAuthProvider() async {
@@ -224,6 +224,23 @@ class AuthProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       _notification = AuthStatusText('New OTP sent successfully. Please check!', type: 'info');
       notifyListeners();
+      return true;
+    }
+  }
+
+  Future<bool> registerDevice(dynamic fcmToken) async {
+    final url = registerDeviceAPI;
+
+    Map<String, String> body = {
+      'registration_id': fcmToken,
+      'type': "android"
+    };
+    String token = await getToken();
+    String header = "token $token";
+
+    final response = await http.post(url, headers: {"Authorization": header}, body: body);
+
+    if (response.statusCode == 200 || response.statusCode == 401) {
       return true;
     }
   }

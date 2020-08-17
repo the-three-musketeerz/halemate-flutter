@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hale_mate/Services/alertService.dart';
-import 'package:hale_mate/models/user/User.dart';
+import 'package:hale_mate/Services/Alert/alertService.dart';
 import 'package:hale_mate/views//Authenticate/login.dart';
 import 'package:hale_mate/views/Authenticate/otpVerify.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';

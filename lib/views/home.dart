@@ -1,6 +1,7 @@
 import 'dart:core';
-import 'package:hale_mate/Services/alertService.dart';
+
 import 'package:flutter/material.dart';
+import 'package:hale_mate/Services/Alert/alertService.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -25,7 +26,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Icon(Icons.warning),
                   backgroundColor: Colors.red[500],
                   onPressed: () {
-                   Navigator.pushReplacementNamed(context, AlertWidget.id);
+                    var route = new MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                      new AlertWidget(),
+                    );
+                    Navigator.of(context).push(route);
                   }),
             )
         )

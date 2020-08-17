@@ -17,3 +17,9 @@ const String otpRefreshAPI = '$baseAPI/otp_refresh/';
 const String logoutAPI = '$baseAPI/logout/';
 const String appointmentAPI = '$baseAPI/appointment/';
 const String hospitalAPI = '$baseAPI/hospital/';
+const String registerDeviceAPI = '$baseAPI/register_device/';
+const String alertAPI = '$baseAPI/alert/';
+const String reportAlertAPI = '$baseAPI/report_alert/';
+
+
+
