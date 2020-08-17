@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/constants.dart';
-import 'package:hale_mate/models/user/User.dart';
 import 'package:hale_mate/views/Authenticate/login.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStatus.dart';
@@ -65,11 +64,6 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    /*var email = args.Email;
-    var phone = args.Phone;
-
-    print(phone);
-    print(email);*/
 
     return Material(
         child: SingleChildScrollView(

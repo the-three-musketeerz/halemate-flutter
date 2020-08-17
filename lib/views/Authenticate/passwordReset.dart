@@ -152,6 +152,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          new Image(image: AssetImage('assets/logo.png')),
                           Text(
                             'Reset Your password',
                             textAlign: TextAlign.center,

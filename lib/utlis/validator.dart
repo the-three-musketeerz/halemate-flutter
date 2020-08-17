@@ -1,5 +1,3 @@
-
-
 class Validate {
 
   // RegEx pattern for validating email addresses.

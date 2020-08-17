@@ -1,14 +1,15 @@
-import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:hale_mate/constants.dart';
-import 'package:hale_mate/models/reminder/medicine.dart';
-import 'package:hale_mate/Services/Alarm/globalBloc.dart';
-import 'package:hale_mate/models/reminder/Enum.dart';
 import 'dart:developer' as developer;
-import 'package:hale_mate/views/alarm/alarm.dart';
-import 'package:hale_mate/Services/Alarm/createAlarmBlock.dart';
-import 'package:provider/provider.dart';
+import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hale_mate/Services/Alarm/createAlarmBlock.dart';
+import 'package:hale_mate/Services/Alarm/globalBloc.dart';
+import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/models/reminder/Enum.dart';
+import 'package:hale_mate/models/reminder/medicine.dart';
+import 'package:hale_mate/views/alarm/alarm.dart';
+import 'package:provider/provider.dart';
 
 class NewEntry extends StatefulWidget {
   @override

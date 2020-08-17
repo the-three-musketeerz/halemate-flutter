@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hale_mate/models/reminder/medicine.dart';
-import 'package:provider/provider.dart';
 import 'package:hale_mate/Services/Alarm/globalBloc.dart';
 import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/models/reminder/medicine.dart';
+import 'package:provider/provider.dart';
 
 class MedicineDetails extends StatelessWidget {
   final Medicine medicine;

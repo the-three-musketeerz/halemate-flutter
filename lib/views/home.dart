@@ -1,7 +1,10 @@
 import 'dart:core';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Alert/alertService.dart';
+import 'package:hale_mate/myScaffold.dart';
+import 'package:hale_mate/constants.dart';
 
 class HomeScreen extends StatefulWidget {
 

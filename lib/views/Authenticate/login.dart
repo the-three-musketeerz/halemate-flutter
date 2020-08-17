@@ -3,12 +3,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/myScaffold.dart';
 import 'package:hale_mate/utlis/validator.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStatus.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStyles.dart';
-import 'package:hale_mate/views/help.dart';
 import 'package:provider/provider.dart';
 
 class LogInForm extends StatefulWidget {
@@ -39,7 +39,7 @@ class LogInFormState extends State<LogInForm> {
       if (success) {
        await _firebaseMessaging.getToken().then((fcmToken) => Provider.of<AuthProvider>(context).registerDevice(fcmToken)
         );
-        Navigator.pushNamed(context, HelpListView.id);
+       Navigator.pushNamed(context, MyScaffold.id);
       }
     }else{
       setState(() {
@@ -51,17 +51,23 @@ class LogInFormState extends State<LogInForm> {
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: SingleChildScrollView(
+
+      child: SingleChildScrollView(
             child: Container(
                 margin: EdgeInsets.all(15.0),
                 child: Form(
                     key: _formKey,
                     child: Center(
-                      heightFactor: 1.5,
+
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(top:50.0, bottom: 20.0),
+                            height: 100,
+                          width: 100,
+                          child: new Image(image: AssetImage('assets/logo.png'))),
                           Text(
                             'Login',
                             textAlign: TextAlign.center,
@@ -72,7 +78,7 @@ class LogInFormState extends State<LogInForm> {
                             builder: (context, provider, child) =>
                                 provider.notification ?? AuthStatusText(''),
                           ),
-                          SizedBox(height: 30.0),
+                          SizedBox(height: 20.0),
                           TextFormField(
                               decoration: AuthStyles.input.copyWith(
                                 hintText: 'Email',

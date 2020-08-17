@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:hale_mate/utlis/validator.dart';
-import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
-import 'package:hale_mate/constants.dart';
-
-import 'package:hale_mate/models/appointment/Appointment.dart';
-import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/Services/Appointment/appointmentProvider.dart';
+import 'package:hale_mate/Services/Authenticate/authProvider.dart';
+import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/models/appointment/Appointment.dart';
 import 'package:hale_mate/views/Appointment/createAppointment.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AppointmentWidget extends StatelessWidget{
+  static const String id = 'Appointment';
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
@@ -22,7 +21,6 @@ class AppointmentWidget extends StatelessWidget{
 }
 
 class Appointments extends StatefulWidget{
-  static const String id = 'Appointment';
   @override
   AppointmentsState createState() => AppointmentsState();
 }

@@ -1,5 +1,6 @@
-import 'authProvider.dart';
 import 'package:hale_mate/utlis/exceptions.dart';
+
+import 'authProvider.dart';
 
 
 class ApiService {

@@ -15,8 +15,6 @@ class RegisterForm extends StatefulWidget {
   RegisterFormState createState() => RegisterFormState();
 }
 
-
-
 class RegisterFormState extends State<RegisterForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _obscureText = true;
@@ -45,7 +43,7 @@ class RegisterFormState extends State<RegisterForm> {
       if (response['success']) {
         var route = new MaterialPageRoute(
           builder: (BuildContext context) =>
-          new OTPVerificationScreen(emailValue: _controller.text),
+              new OTPVerificationScreen(emailValue: _controller.text),
         );
         Navigator.of(context).push(route);
         print(email);
@@ -64,57 +62,58 @@ class RegisterFormState extends State<RegisterForm> {
         child: SingleChildScrollView(
             child: Container(
                 margin: EdgeInsets.all(15.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Center(
-                            heightFactor: 1.5,
-                            child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                'Register Account',
-                                textAlign: TextAlign.center,
-                                style: AuthStyles.h1,
-                              ),
-                              SizedBox(height: 10.0),
-                              Consumer<AuthProvider>(
-                                builder: (context, provider, child) =>
+                child: Form(
+                    key: _formKey,
+                    child: Center(
+                      heightFactor: 1.1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+
+                          Text(
+                            'Register Account',
+                            textAlign: TextAlign.center,
+                            style: AuthStyles.h1,
+                          ),
+                          SizedBox(height: 10.0),
+                          Consumer<AuthProvider>(
+                            builder: (context, provider, child) =>
                                 provider.notification ?? AuthStatusText(''),
+                          ),
+                          SizedBox(height: 10.0),
+                          Text(
+                            message,
+                            textAlign: TextAlign.center,
+                            style: AuthStyles.error,
+                          ),
+                          SizedBox(height: 10.0),
+                          TextFormField(
+                              decoration: AuthStyles.input.copyWith(
+                                hintText: 'Name',
+                                icon: Icon(Icons.account_circle),
                               ),
-                              SizedBox(height: 10.0),
-                              Text(
-                                message,
-                                textAlign: TextAlign.center,
-                                style: AuthStyles.error,
+                              validator: (value) {
+                                name = value.trim();
+                                return Validate.requiredField(
+                                    value, 'Name is required.');
+                              }),
+                          SizedBox(height: 15.0),
+                          TextFormField(
+                              decoration: AuthStyles.input.copyWith(
+                                hintText: 'Email',
+                                icon: Icon(Icons.email),
                               ),
-                              SizedBox(height: 10.0),
-                              TextFormField(
-                                  decoration: AuthStyles.input.copyWith(
-                                    hintText: 'Name',
-                                    icon: Icon(Icons.account_circle),
-                                  ),
-                                  validator: (value) {
-                                    name = value.trim();
-                                    return Validate.requiredField(
-                                        value, 'Name is required.');
-                                  }),
-                              SizedBox(height: 15.0),
-                              TextFormField(
-                                  decoration: AuthStyles.input.copyWith(
-                                    hintText: 'Email',
-                                    icon: Icon(Icons.email),
-                                  ),
-                                  controller: _controller,
-                                  validator: (value) {
-                                    email = value.trim();
-                                    return Validate.validateEmail(value);
-                                  }),
-                              SizedBox(height: 15.0),
-                              TextFormField(
-                                  obscureText: _obscureText,
-                                  decoration: AuthStyles.input.copyWith(
-                                     /* border: OutlineInputBorder(
+                              controller: _controller,
+                              validator: (value) {
+                                email = value.trim();
+                                return Validate.validateEmail(value);
+                              }),
+                          SizedBox(height: 15.0),
+                          TextFormField(
+                              obscureText: _obscureText,
+                              decoration: AuthStyles.input.copyWith(
+                                  /* border: OutlineInputBorder(
                                         gapPadding: 1.0,
                                         borderSide: BorderSide(
                                           color: Colors.grey[600],
@@ -127,79 +126,64 @@ class RegisterFormState extends State<RegisterForm> {
                                           width: 2.0,
                                         ),
                                       ),*/
-                                    hintText: 'Password',
-                                    icon: Container(
+                                  hintText: 'Password',
+                                  icon: Container(
                                       width: 15.0,
-                                        margin: EdgeInsets.only(right: 10.0),
-                                        child: IconButton(
-                                        onPressed: (){
-                                          _toggle();
-                                        },
-                                        icon: Icon(Icons.remove_red_eye))
-                                  )),
-                                  validator: (value) {
-                                    AuthStyles.p
-                                        .copyWith(color: Colors.blue[500]);
-                                    password = value.trim();
-                                    return Validate.requiredField(
-                                        value, 'Password is required.');
-                                  }),
-                              SizedBox(height: 15.0),
-                              TextFormField(
-                                  obscureText:  _obscureText,
-                                  decoration: AuthStyles.input.copyWith(
-                                    hintText: 'Confirm Password ',
-                                      icon: Container(
-                                          width: 15.0,
-                                          margin: EdgeInsets.only(right: 10.0),
-                                          child: IconButton(
-                                          onPressed: ()
-                                          {
+                                      margin: EdgeInsets.only(right: 10.0),
+                                      child: IconButton(
+                                          onPressed: () {
                                             _toggle();
                                           },
-                                          icon: Icon(Icons.remove_red_eye))
-                                  )),
+                                          icon: Icon(Icons.remove_red_eye)))),
+                              validator: (value) {
+                                AuthStyles.p.copyWith(color: Colors.blue[500]);
+                                password = value.trim();
+                                return Validate.requiredField(
+                                    value, 'Password is required.');
+                              }),
+                          SizedBox(height: 15.0),
+                          TextFormField(
+                              obscureText: _obscureText,
+                              decoration: AuthStyles.input.copyWith(
+                                  hintText: 'Confirm Password ',
+                                  icon: Container(
+                                      width: 15.0,
+                                      margin: EdgeInsets.only(right: 10.0),
+                                      child: IconButton(
+                                          onPressed: () {
+                                            _toggle();
+                                          },
+                                          icon: Icon(Icons.remove_red_eye)))),
+                              validator: (value) {
+                                passwordConfirm = value.trim();
 
-                                  validator: (value) {
-                                    passwordConfirm = value.trim();
-
-                                    return Validate.passwordMatch(
-                                        value, password);
-                                  }
-                                  ),
-                              SizedBox(height: 15.0),
-                              TextFormField(
-                                  decoration: AuthStyles.input.copyWith(
-                                    hintText:
-                                        'Enter Phone Number Eg. +910000000000',
-                                    icon: Icon(Icons.phone),
-                                  ),
-
-                                  keyboardType:
-                                      TextInputType.numberWithOptions(),
-                                  onChanged: (value) {
-                                    this.phone = value;
-                                  },
-                                  validator: (value) {
-                                    phone = value.trim();
-                                    return Validate.validatePhone(
-                                        value);
-                                  }),
-
-                              SizedBox(height: 20.0),
-                              StyledButton(
-                                'Register',
-                                onPressed: (){
-                                  _toggle();
-                                  submit();
-                                },
+                                return Validate.passwordMatch(value, password);
+                              }),
+                          SizedBox(height: 15.0),
+                          TextFormField(
+                              decoration: AuthStyles.input.copyWith(
+                                hintText:
+                                    'Enter Phone Number Eg. +910000000000',
+                                icon: Icon(Icons.phone),
                               ),
-                            ],
+                              keyboardType: TextInputType.numberWithOptions(),
+                              onChanged: (value) {
+                                this.phone = value;
+                              },
+                              validator: (value) {
+                                phone = value.trim();
+                                return Validate.validatePhone(value);
+                              }),
+                          SizedBox(height: 20.0),
+                          StyledButton(
+                            'Register',
+                            onPressed: () {
+                              _toggle();
+                              submit();
+                            },
                           ),
-                        )
-                        )
-            )
-        )
-    );
+                        ],
+                      ),
+                    )))));
   }
 }

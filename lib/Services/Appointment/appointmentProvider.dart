@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
-import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/utlis/exceptions.dart';
-import 'package:hale_mate/models/appointment/Appointment.dart';
-import 'package:hale_mate/models/appointment/Hospital.dart';
-import 'package:hale_mate/models/appointment/Doctor.dart';
 import 'package:hale_mate/Services/Appointment/appointmentApiService.dart';
+import 'package:hale_mate/Services/Authenticate/authProvider.dart';
+import 'package:hale_mate/models/appointment/Appointment.dart';
+import 'package:hale_mate/models/appointment/Doctor.dart';
+import 'package:hale_mate/models/appointment/Hospital.dart';
+import 'package:hale_mate/utlis/exceptions.dart';
 
 class AppointmentProvider with ChangeNotifier{
 

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hale_mate/Services/Alarm/globalBloc.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
+import 'package:hale_mate/myScaffold.dart';
 import 'package:hale_mate/utlis/router.dart';
-import 'package:hale_mate/views/Appointment/appointment.dart';
 import 'package:hale_mate/views/Authenticate/login.dart';
 import 'package:hale_mate/views/alarm/alarm.dart';
-import 'package:hale_mate/views/help.dart';
 import 'package:hale_mate/views/home.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -28,55 +28,18 @@ class _HaleMateAppState extends State<HaleMateApp> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    const color = const Color(0xff30bfbf);
+
     //final AuthProvider authProvider = Provider.of<AuthProvider>(context);
     return ChangeNotifierProvider(
         builder: (context) => AuthProvider(),
       child: MaterialApp(
-        /*routes: {
-          OTPVerificationScreen.id: (context) => OTPVerificationScreen(),
-        },*/
+        debugShowCheckedModeBanner: false,
         onGenerateRoute: Router.generateRoute,
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('HaleMate'),
-            backgroundColor: Color(0xff008c8c),
-          ),
-          body: DefaultTabController(
-              length: 5,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    constraints: BoxConstraints(maxHeight: 70.0),
-                    child: Material(
-                     color: color,
-                      child: TabBar(
-                        tabs: [
-                          Tab(icon: Icon(Icons.home), text: "Home"),
-                          Tab(icon: Icon(Icons.local_hospital), text: 'appointment'),
-                          Tab(icon: Icon(Icons.alarm), text: 'Alarm'),
-                          Tab(icon: Icon(Icons.account_circle), text: 'Profile',),
-                          Tab(icon: Icon(Icons.info), text: 'Help'),
-                        ],
-                        indicatorColor: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                      child: TabBarView(
-                        children: [
-                          HomeScreen(),
-                          AppointmentWidget(),
-                          MedReminder(),
-                          LogInForm(),
-                          HelpListView(),
-                        ],  ))
-                ],
-              )
+      initialRoute: '/',
+      routes: {
+        '/': (context) => NavigationRouter(),
+      },
 
-
-          ),
-        ),
       ));
   }
 }
@@ -103,13 +66,31 @@ class _MedReminderState extends State<MedReminder> {
     return Provider<GlobalBloc>.value(
       value: globalBloc,
       child: MaterialApp(
-        /*theme: ThemeData(
-          primarySwatch: Colors.green,
-          brightness: Brightness.light,
-        ),*/
         home: AlarmHomeScreen(),
        debugShowCheckedModeBanner: false,
       ),
+    );
+  }
+}
+
+class NavigationRouter extends StatelessWidget {
+  //final authProvider = Provider.of<AuthProvider>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AuthProvider>(
+      builder: (context, user, child) {
+        switch (user.status) {
+          case Status.Unauthenticated:
+            return LogInForm();
+          case Status.Authenticated:
+            return MyScaffold();
+          case Status.Uninitialized:
+            return LogInForm();
+          default:
+            return MyScaffold();
+        }
+      },
     );
   }
 }
