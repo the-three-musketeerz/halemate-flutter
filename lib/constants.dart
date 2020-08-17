@@ -6,7 +6,7 @@ const colorDark = const Color(0xff008c8c);
 //API endpoints
 
 
-const String baseAPI = 'http://8be4b2e26878.ngrok.io/halemate';
+const String baseAPI = 'http://halemate-backend.southeastasia.cloudapp.azure.com:8000/halemate';
 
 
 

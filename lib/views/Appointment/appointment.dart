@@ -32,6 +32,7 @@ class AppointmentsState extends State<Appointments>{
   Widget build(BuildContext context) {
 
     final appointments = Provider.of<AppointmentProvider>(context).appointments;
+    print(appointments);
 
     return Scaffold(
       body: appointmentList(context, appointments),

@@ -56,9 +56,11 @@ class RSSHealthState extends State<RSSHealth> {
   GlobalKey<RefreshIndicatorState> _refreshKey;
 
   updateFeed(feed) {
-    setState(() {
-      _feed = feed;
-    });
+    if(this.mounted){
+      setState(() {
+       _feed = feed;
+      });
+    }
   }
 
   Future<void> openFeed(String url) async {
