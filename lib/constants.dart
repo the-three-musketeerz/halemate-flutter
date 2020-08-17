@@ -5,7 +5,7 @@ const colorDark = const Color(0xff008c8c);
 
 //API endpoints
 
-const String baseAPI = 'http://10.0.2.2:8000/halemate';
+const String baseAPI = "http://halemate-backend.southeastasia.cloudapp.azure.com:8000/halemate";
 
 const String loginAPI = '$baseAPI/login/';
 const String signupAPI = '$baseAPI/signup/';
@@ -15,4 +15,4 @@ const String otpVerifyAPI = '$baseAPI/otp_verify/';
 const String otpRefreshAPI = '$baseAPI/otp_refresh/';
 const String logoutAPI = '$baseAPI/logout/';
 const String appointmentAPI = '$baseAPI/appointment/';
-
+const String hospitalAPI = '$baseAPI/hospital/';

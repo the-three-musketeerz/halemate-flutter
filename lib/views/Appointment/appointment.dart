@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:hale_mate/utlis/validator.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:hale_mate/constants.dart';
 
 import 'package:hale_mate/models/appointment/Appointment.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/Services/Appointment/appointmentProvider.dart';
+import 'package:hale_mate/views/Appointment/createAppointment.dart';
 
 class AppointmentWidget extends StatelessWidget{
   @override
@@ -26,24 +29,35 @@ class Appointments extends StatefulWidget{
 
 class AppointmentsState extends State<Appointments>{
   bool loading = false;
-  String activeTab = 'open';
 
   @override
   Widget build(BuildContext context) {
 
     final appointments = Provider.of<AppointmentProvider>(context).appointments;
 
-    return appointmentList(context, appointments);
+    return Scaffold(
+      body: appointmentList(context, appointments),
+      floatingActionButton: FloatingActionButton(
+        elevation: 4,
+        backgroundColor: colorDark,
+        child: Icon(Icons.add),
+        onPressed:(){
+          Navigator.pushNamed(context, CreateAppointmentWidget.id);
+        },
+      ),
+    );
   }
 }
 
 
 Widget appointmentList(BuildContext context, List<Appointment> appointments){
   DateFormat dateFormat = DateFormat("HH:mm:ss dd-MM-yyyy ");
-  return ListView.builder(
+  return (appointments.length != 0)?
+    ListView.builder(
       itemBuilder: (BuildContext context, int index){
         final appointment = appointments[index];
         return Container(
+          color: Color(0xFFF6F8FC),
           //height: 200,
           child: Card(
             //semanticContainer: true,
@@ -98,7 +112,7 @@ Widget appointmentList(BuildContext context, List<Appointment> appointments){
                   ),
                   ListTile(
                     //leading: Icon(Icons.person),
-                    title: Text('Appointment time: '+((appointment.appointmentTime == null)?'':dateFormat.format(appointment.appointmentTime)), style: TextStyle(fontSize: 15),),
+                    title: Text('Appointment time: '+((appointment.appointmentTime == '')?'':dateFormat.format(appointment.appointmentTime)), style: TextStyle(fontSize: 15),),
                   ),
                 ],
               )
@@ -109,5 +123,16 @@ Widget appointmentList(BuildContext context, List<Appointment> appointments){
         );
       },
       itemCount: appointments.length
+  )
+  : Center(
+    child: Text(
+      'Press + to make new a new appointment',
+          style: TextStyle(
+              fontSize: 24,
+              color: Colors.grey,
+              fontWeight: FontWeight.bold
+          ),
+    ),
   );
+
 }

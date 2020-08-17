@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:hale_mate/constanst.dart';
+import 'package:hale_mate/constants.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStatus.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';

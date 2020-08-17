@@ -16,7 +16,7 @@ class Appointment {
   String doctorName;
   String reason;
   String status;
-  DateTime appointmentTime;
+  dynamic appointmentTime;
   DateTime appointmentMadeTime;
 
   Appointment(
@@ -45,7 +45,7 @@ class Appointment {
     doctorName: json['doctor']['name'],
     reason: json['reason'],
     status: json['status'],
-    appointmentTime: (json['appointment_time'] == '')? DateTime.parse(json['appointment_time']) : null,
+    appointmentTime: (json['appointment_time'] != null)? DateTime.parse(json['appointment_time']) : '',
     appointmentMadeTime: DateTime.parse(json['appointment_made_time']),
   );
 

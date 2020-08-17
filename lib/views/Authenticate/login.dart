@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/constanst.dart';
+import 'package:hale_mate/constants.dart';
 import 'package:hale_mate/utlis/validator.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';

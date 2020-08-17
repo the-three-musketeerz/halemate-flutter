@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:hale_mate/constanst.dart';
+import 'package:hale_mate/constants.dart';
 import 'package:hale_mate/models/reminder/medicine.dart';
 import 'package:hale_mate/Services/Alarm/globalBloc.dart';
 import 'package:hale_mate/models/reminder/Enum.dart';
