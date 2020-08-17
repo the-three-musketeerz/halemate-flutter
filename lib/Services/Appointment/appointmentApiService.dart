@@ -15,7 +15,7 @@ class AppointmentApiService{
   AuthProvider authProvider;
   String token;
 
-  AppointmentApiService(AuthProvider authProvider){
+  AppointmentApiService(AuthProvider authProvider) {
     this.authProvider = authProvider;
     this.token = authProvider.token;
   }
@@ -33,6 +33,7 @@ class AppointmentApiService{
 //  }
 
   Future<List<Appointment>> getAppointments() async{
+    token = await authProvider.getToken();
     final response = await http.get(
       api,
       headers:{
