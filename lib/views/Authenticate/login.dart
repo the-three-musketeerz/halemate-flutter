@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
@@ -24,12 +25,26 @@ class LogInFormState extends State<LogInForm> {
   String email;
   String password;
   String message = '';
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+
+
 
   Future<void> submit() async {
     final form = _formKey.currentState;
+
+
     if (form.validate()) {
-      await Provider.of<AuthProvider>(context).login(email, password);
-      Navigator.pushNamed(context, HelpListView.id);
+      bool success = await Provider.of<AuthProvider>(context).login(email, password);
+      if (success) {
+       await _firebaseMessaging.getToken().then((fcmToken) => Provider.of<AuthProvider>(context).registerDevice(fcmToken)
+        );
+        Navigator.pushNamed(context, HelpListView.id);
+      }
+    }else{
+      setState(() {
+        message = "Please give valid login credentials";
+      });
     }
   }
 
@@ -120,6 +135,10 @@ class LogInFormState extends State<LogInForm> {
                           ),
                         ],
                       ),
-                    )))));
+                    )
+                )
+            )
+        )
+    );
   }
 }
