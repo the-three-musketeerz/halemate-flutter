@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/Services/Appointment/appointmentProvider.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStyles.dart';
+import 'package:hale_mate/views/Appointment/appointment.dart';
 
 class CreateAppointmentWidget extends StatelessWidget{
   static const String id = 'CreateAppointment';
@@ -39,7 +40,7 @@ class _CreateAppointmentState extends State<CreateAppointment>{
     final form = _formKey.currentState;
     if(form.validate()){
       await Provider.of<AppointmentProvider>(context).createAppointment(patientName, hospital, doctor, reason);
-      Navigator.pop(context);
+      Navigator.pushNamed(context, AppointmentWidget.id);
     }
   }
 

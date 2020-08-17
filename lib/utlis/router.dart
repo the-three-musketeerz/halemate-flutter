@@ -25,7 +25,7 @@ class Router {
         return MaterialPageRoute(builder: (_) => AlertWidget());
       case HelpListView.id:
         return MaterialPageRoute(builder: (_) => HelpListView());
-      case Appointments.id:
+      case AppointmentWidget.id:
         return MaterialPageRoute(builder: (_) => AppointmentWidget());
       case CreateAppointmentWidget.id:
         return MaterialPageRoute(builder: (_) => CreateAppointmentWidget());

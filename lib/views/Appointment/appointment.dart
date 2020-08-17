@@ -11,6 +11,7 @@ import 'package:hale_mate/Services/Appointment/appointmentProvider.dart';
 import 'package:hale_mate/views/Appointment/createAppointment.dart';
 
 class AppointmentWidget extends StatelessWidget{
+  static const String id = 'Appointment';
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
@@ -22,7 +23,6 @@ class AppointmentWidget extends StatelessWidget{
 }
 
 class Appointments extends StatefulWidget{
-  static const String id = 'Appointment';
   @override
   AppointmentsState createState() => AppointmentsState();
 }
