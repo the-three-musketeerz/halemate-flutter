@@ -40,7 +40,11 @@ class _HaleMateAppState extends State<HaleMateApp> {
         onGenerateRoute: Router.generateRoute,
       home: Scaffold(
           appBar: AppBar(
-            title: Text('HaleMate'),
+            title: Text('HaleMate'),  Future<String> getToken() async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+    String token = storage.getString('token');
+    return token;
+  }
             backgroundColor: Color(0xff008c8c),
           ),
           body: DefaultTabController(
