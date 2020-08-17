@@ -9,7 +9,6 @@ class User {
   String medicalRecord;
   List<TrustedContacts> trustedContacts;
 
-
   User(
       {this.userId,
       this.email,
@@ -29,14 +28,14 @@ class User {
 }
 
 class TrustedContacts {
-  final String contactName;
-  final String contactNumber;
+  String contactName;
+  String contactNumber;
 
   TrustedContacts({this.contactName, this.contactNumber});
 
   //encoding data into a json object to be sent to the server
   Map<String, dynamic> toJson() =>
-      {"contactName": contactName, "contactNumber": contactNumber};
+      {"trusted_name": contactName, "trusted_phone": contactNumber, };
 }
 
 class PassedData {

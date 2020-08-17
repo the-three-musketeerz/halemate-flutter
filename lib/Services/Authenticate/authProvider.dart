@@ -45,13 +45,14 @@ class AuthProvider with ChangeNotifier {
       _userProfile.userId = apiResponse['id'];
       _userProfile.name = apiResponse['name'];
       _userProfile.phoneNumber = apiResponse['phoneNumber'];
+      await storeUserData(apiResponse);
       notifyListeners();
     }
   }
 
   //Future<bool> updateUserProfile : updates the profile involving medical
   Future<bool> updateUserMedicalRecord(String medicalHistory) async {
-    final url = loginAPI;
+    final url = loginAPI; //needs to be changed
     String token = await getToken();
     String header = "token $token";
 
@@ -71,7 +72,11 @@ class AuthProvider with ChangeNotifier {
     return false;
   }
 
-  //Future<bool>
+  //Future<bool> updateTrustedContact : updated the list of trusted contacts
+  //for that user
+  Future<void> updateTrustedContact(List<TrustedContacts> contacts) async{
+    contacts.map((e) => e.toJson())
+  }
 
   Future<bool> login(String email, String password) async {
     _status = Status.Authenticating;
@@ -294,6 +299,7 @@ class AuthProvider with ChangeNotifier {
 
   storeUserData(apiResponse) async {
     SharedPreferences storage = await SharedPreferences.getInstance();
+    await storage.setInt('id', apiResponse['id']);
     await storage.setString('token', apiResponse['token']);
   }
 
@@ -301,6 +307,12 @@ class AuthProvider with ChangeNotifier {
     SharedPreferences storage = await SharedPreferences.getInstance();
     String token = storage.getString('token');
     return token;
+  }
+
+  Future<int> getUserId() async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+    int userId = storage.getInt('id');
+    return userId;
   }
 
   logOut([bool tokenExpired = false]) async {
