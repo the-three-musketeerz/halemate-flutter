@@ -10,6 +10,7 @@ import 'package:hale_mate/views/help.dart';
 import 'package:hale_mate/views/home.dart';
 import 'package:hale_mate/utlis/router.dart';
 import 'package:provider/provider.dart';
+import 'package:hale_mate/views/profile.dart';
 
 void main() {
   runApp(HaleMateApp());
@@ -40,11 +41,7 @@ class _HaleMateAppState extends State<HaleMateApp> {
         onGenerateRoute: Router.generateRoute,
       home: Scaffold(
           appBar: AppBar(
-            title: Text('HaleMate'),  Future<String> getToken() async {
-    SharedPreferences storage = await SharedPreferences.getInstance();
-    String token = storage.getString('token');
-    return token;
-  }
+            title: Text('HaleMate'),
             backgroundColor: Color(0xff008c8c),
           ),
           body: DefaultTabController(
@@ -73,7 +70,7 @@ class _HaleMateAppState extends State<HaleMateApp> {
                           HomeScreen(),
                           AppointmentWidget(),
                           MedReminder(),
-                          LogInForm(),
+                          Profile(),
                           HelpListView(),
                         ],  ))
                 ],

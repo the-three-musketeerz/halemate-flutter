@@ -1,7 +1,8 @@
-import 'dart:html';
+import 'dart:convert';
+
 
 class User {
-  String userId;
+  int userId;
   String email;
   String name;
   String phoneNumber;

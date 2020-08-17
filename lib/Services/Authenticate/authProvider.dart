@@ -18,6 +18,7 @@ class AuthProvider with ChangeNotifier {
   Status get status => _status;
   String get token => _token;
   AuthStatusText get notification => _notification;
+  User get userProfile => _userProfile;
 
   initAuthProvider() async {
     String token = await getToken();
@@ -39,12 +40,16 @@ class AuthProvider with ChangeNotifier {
     final response = await http.get(url, headers: {"Authorization": header});
 
     if (response.statusCode == 200) {
-      Map<String, dynamic> apiResponse = json.decode(response.body);
-      _userProfile.email = apiResponse['email'];
-      _userProfile.medicalRecord = apiResponse['medical_history'];
-      _userProfile.userId = apiResponse['id'];
-      _userProfile.name = apiResponse['name'];
-      _userProfile.phoneNumber = apiResponse['phoneNumber'];
+      dynamic a = json.decode(response.body);
+      Map<String, dynamic> apiResponse = (json.decode(response.body))[0];
+      User newUser = new User(
+        email: apiResponse['email'],
+        medicalRecord: apiResponse['medical_history'],
+        userId: apiResponse['id'],
+        name: apiResponse['name'],
+        phoneNumber: apiResponse['phoneNumber']
+      );
+      _userProfile = newUser;
       await storeUserData(apiResponse);
       notifyListeners();
     }
@@ -75,7 +80,7 @@ class AuthProvider with ChangeNotifier {
   //Future<bool> updateTrustedContact : updated the list of trusted contacts
   //for that user
   Future<void> updateTrustedContact(List<TrustedContacts> contacts) async{
-    contacts.map((e) => e.toJson())
+    contacts.map((e) => e.toJson());
   }
 
   Future<bool> login(String email, String password) async {

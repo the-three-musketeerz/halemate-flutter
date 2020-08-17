@@ -33,6 +33,7 @@ class AppointmentApiService{
 //  }
 
   Future<List<Appointment>> getAppointments() async{
+    token = await authProvider.getToken();
     final response = await http.get(
       api,
       headers:{
