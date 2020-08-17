@@ -10,6 +10,7 @@ const String baseAPI = "http://halemate-backend.southeastasia.cloudapp.azure.com
 const String loginAPI = '$baseAPI/login/';
 const String signupAPI = '$baseAPI/signup/';
 const String forgotPasswordAPI = '$baseAPI/forgot_password/';
+const String resetPasswordAPI = '$baseAPI/reset_password/';
 const String signupVerifyAPI = '$baseAPI/signup_verify/';
 const String otpVerifyAPI = '$baseAPI/otp_verify/';
 const String otpRefreshAPI = '$baseAPI/otp_refresh/';

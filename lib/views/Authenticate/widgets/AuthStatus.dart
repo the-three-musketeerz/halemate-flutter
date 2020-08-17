@@ -12,13 +12,17 @@ class AuthStatusText extends StatelessWidget {
     Color color = Colors.red;
 
     if ('info' == type) {
-      color = Colors.blue;
+      color = Colors.green;
     }
 
+    if ('error' == type) {
+      color = Colors.red;
+    }
     return Text(
       text,
       textAlign: TextAlign.center,
-      style: TextStyle(color: color),
+      style: TextStyle(color: color,
+      fontWeight: FontWeight.bold),
     );
   }
 }

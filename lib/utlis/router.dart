@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/alertService.dart';
+import 'package:hale_mate/models/user/User.dart';
 import 'package:hale_mate/views//Authenticate/login.dart';
+import 'package:hale_mate/views/Authenticate/otpVerify.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
 import 'package:hale_mate/views/Appointment/appointment.dart';
@@ -18,8 +20,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => RegisterForm());
       case LogInForm.id:
         return MaterialPageRoute(builder: (_) => LogInForm());
-      case PasswordResetForm.id:
-        return MaterialPageRoute(builder: (_) => PasswordResetForm());
+      case ForgotPasswordForm.id:
+        return MaterialPageRoute(builder: (_) => ForgotPasswordForm());
       case AlertWidget.id:
         return MaterialPageRoute(builder: (_) => AlertWidget());
       case HelpListView.id:
@@ -28,6 +30,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => AppointmentWidget());
       case CreateAppointmentWidget.id:
         return MaterialPageRoute(builder: (_) => CreateAppointmentWidget());
+      case OTPVerificationScreen.id:
+        return MaterialPageRoute(builder: (_) => OTPVerificationScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

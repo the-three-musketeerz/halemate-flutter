@@ -7,16 +7,19 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
+enum OTPmethod{viaEmail, viaPhone}
 
 class AuthProvider with ChangeNotifier {
 
   Status _status = Status.Uninitialized;
   String _token;
   AuthStatusText _notification;
+  OTPmethod _method = OTPmethod.viaEmail;
 
   Status get status => _status;
   String get token => _token;
   AuthStatusText get notification => _notification;
+  OTPmethod get method => _method;
 
 
   initAuthProvider() async {
@@ -82,10 +85,10 @@ class AuthProvider with ChangeNotifier {
 
       Map<String, dynamic> result = {
         "success": false,
-        "message": 'Unknown error.'
+        "message": 'Email already exists. Try registering with a different email'
       };
 
-      final response = await http.post(url, body: body,);
+      final response = await http.post(url, body: body);
 
       if (response.statusCode == 200) {
         _notification = AuthStatusText(
@@ -94,6 +97,15 @@ class AuthProvider with ChangeNotifier {
         result['success'] = true;
         return result;
       }
+
+      if (response.statusCode == 400) {
+        _notification = AuthStatusText(
+            'Email already registered! Try registering with a different email', type: 'error');
+        notifyListeners();
+        result['success'] = true;
+        return result;
+      }
+
 
       Map apiResponse = json.decode(response.body);
 
@@ -115,7 +127,7 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> passwordReset(String email) async {
+  Future<bool> forgotPassword(String email) async {
     final url = forgotPasswordAPI;
 
     Map<String, String> body = {
@@ -125,13 +137,97 @@ class AuthProvider with ChangeNotifier {
     final response = await http.post( url, body: body, );
 
     if (response.statusCode == 200) {
-      _notification = AuthStatusText('Email sent for password reset. Please check your inbox.', type: 'info');
+      _notification = AuthStatusText('Email sent for password reset. If you did not receive the email, please recheck the email entered.', type: 'info');
       notifyListeners();
       return true;
     }
 
     return false;
   }
+
+  Future<bool> resetPassword(String email, String OTP, String newPassword) async {
+    final url = resetPasswordAPI;
+
+    Map<String, String> body = {
+      'OTP': OTP,
+      'email': email,
+      'new_password': newPassword
+    };
+
+    final response = await http.post( url, body: body, );
+
+    if (response.statusCode == 200) {
+      _notification = AuthStatusText('Your Password has been reset successfully! Login to continue', type: 'info');
+      notifyListeners();
+      return true;
+    }
+
+    if (response.statusCode == 409) {
+      _notification = AuthStatusText('Invalid OTP! Please enter correct OTP', type: 'error');
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> sendOTP(String method, String email) async {
+    final url = signupVerifyAPI;
+
+    Map<String, String> body = {
+      'email': email,
+      'verification_method': method
+    };
+    
+    final response = await http.post(url, body: body);
+
+    if (response.statusCode == 200) {
+      _notification = AuthStatusText('OTP sent. Please enter OTP!', type: 'info');
+      notifyListeners();
+      return true;
+    }
+     return false;
+  }
+
+  Future<bool> verifyOTP(String OTP, String email) async {
+    final url = otpVerifyAPI;
+
+    Map<String, dynamic> body = {
+      'email': email,
+      'OTP': OTP
+    };
+
+    final response = await http.post(url, body: body);
+
+    if (response.statusCode == 200) {
+      _notification = AuthStatusText('OTP verification successful!', type: 'info');
+      notifyListeners();
+      return true;
+    }
+
+    if (response.statusCode == 409) {
+      _notification = AuthStatusText('Invalid OTP! Please enter correct OTP', type: 'error');
+      notifyListeners();
+      return false;
+    }
+
+  }
+
+  Future<bool> refreshOTP(String method, String email) async {
+    final url = otpRefreshAPI;
+
+    Map<String, String> body = {
+      'email': email,
+      'verification_method': method
+    };
+
+    final response = await http.post(url, body: body);
+
+    if (response.statusCode == 200) {
+      _notification = AuthStatusText('New OTP sent successfully. Please check!', type: 'info');
+      notifyListeners();
+      return true;
+    }
+  }
+
 
   storeUserData(apiResponse) async {
     SharedPreferences storage = await SharedPreferences.getInstance();

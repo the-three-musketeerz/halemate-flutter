@@ -78,8 +78,8 @@ class LogInFormState extends State<LogInForm> {
                                     value, 'Password is required.');
                               }),
                           SizedBox(height: 15.0),
-                          FlatButton(
-                            child: Text('Sign In'),
+                          StyledButton(
+                            'Login',
                             onPressed: submit,
                           ),
                           SizedBox(height: 25.0),
@@ -114,7 +114,7 @@ class LogInFormState extends State<LogInForm> {
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () => {
                                           Navigator.pushNamed(
-                                              context, PasswordResetForm.id),
+                                              context, ForgotPasswordForm.id),
                                         }),
                             ),
                           ),

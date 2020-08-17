@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/views/Authenticate/login.dart';
+import 'package:hale_mate/views/Authenticate/otpVerify.dart';
 import 'package:hale_mate/views/alarm/alarm.dart';
 import 'package:hale_mate/Services/Alarm/globalBloc.dart';
 import 'package:hale_mate/views/Appointment/appointment.dart';
@@ -33,6 +34,9 @@ class _HaleMateAppState extends State<HaleMateApp> {
     return ChangeNotifierProvider(
         builder: (context) => AuthProvider(),
       child: MaterialApp(
+        /*routes: {
+          OTPVerificationScreen.id: (context) => OTPVerificationScreen(),
+        },*/
         onGenerateRoute: Router.generateRoute,
       home: Scaffold(
           appBar: AppBar(
@@ -64,6 +68,7 @@ class _HaleMateAppState extends State<HaleMateApp> {
                         children: [
                           HomeScreen(),
                           AppointmentWidget(),
+                          OTPVerificationScreen(),
                           MedReminder(),
                           LogInForm(),
                           HelpListView(),
