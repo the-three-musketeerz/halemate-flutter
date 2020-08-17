@@ -4,6 +4,8 @@ import 'package:hale_mate/views//Authenticate/login.dart';
 import 'package:hale_mate/views/Authenticate/otpVerify.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
+import 'package:hale_mate/views/Appointment/appointment.dart';
+import 'package:hale_mate/views/Appointment/createAppointment.dart';
 import 'package:hale_mate/views/help.dart';
 import 'package:hale_mate/views/home.dart';
 
@@ -23,6 +25,10 @@ class Router {
         return MaterialPageRoute(builder: (_) => AlertWidget());
       case HelpListView.id:
         return MaterialPageRoute(builder: (_) => HelpListView());
+      case AppointmentWidget.id:
+        return MaterialPageRoute(builder: (_) => AppointmentWidget());
+      case CreateAppointmentWidget.id:
+        return MaterialPageRoute(builder: (_) => CreateAppointmentWidget());
       case OTPVerificationScreen.id:
         return MaterialPageRoute(builder: (_) => OTPVerificationScreen());
       default:
