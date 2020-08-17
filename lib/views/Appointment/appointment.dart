@@ -127,6 +127,7 @@ Widget appointmentList(BuildContext context, List<Appointment> appointments){
   : Center(
     child: Text(
       'Press + to make new a new appointment',
+          textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 24,
               color: Colors.grey,

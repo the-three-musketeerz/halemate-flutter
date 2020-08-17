@@ -133,7 +133,7 @@ class _CreateAppointmentState extends State<CreateAppointment>{
                   height: 50,
                   child: FlatButton(
                     child: Text('Create Appointment'),
-                    color: colorDark,
+                    color: colorLight,
                     textColor: Colors.white,
                     onPressed: () {
                       submit();

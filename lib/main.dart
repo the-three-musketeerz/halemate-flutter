@@ -68,7 +68,6 @@ class _HaleMateAppState extends State<HaleMateApp> {
                         children: [
                           HomeScreen(),
                           AppointmentWidget(),
-                          OTPVerificationScreen(),
                           MedReminder(),
                           LogInForm(),
                           HelpListView(),
