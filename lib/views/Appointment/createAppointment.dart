@@ -8,6 +8,7 @@ import 'package:hale_mate/utlis/validator.dart';
 import 'package:hale_mate/views/Appointment/appointment.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStyles.dart';
 import 'package:provider/provider.dart';
+import 'package:hale_mate/myScaffold.dart';
 
 class CreateAppointmentWidget extends StatelessWidget{
   static const String id = 'CreateAppointment';
@@ -38,7 +39,7 @@ class _CreateAppointmentState extends State<CreateAppointment>{
     final form = _formKey.currentState;
     if(form.validate()){
       await Provider.of<AppointmentProvider>(context).createAppointment(patientName, hospital, doctor, reason);
-      Navigator.pushNamed(context, AppointmentWidget.id);
+      Navigator.pushNamed(context, MyScaffold.id);
     }
   }
 
@@ -50,6 +51,13 @@ class _CreateAppointmentState extends State<CreateAppointment>{
     List<Map<String, dynamic>> hospitalList = hospitals.where((element) => true).map((e) => {'value':e.id, 'text':e.name}).toList();
 
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Create Appointment"),
+          backgroundColor: colorDark,
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pushNamed(context, MyScaffold.id),
+          ),),
       body: Container(
         margin: EdgeInsets.all(25.0),
         child: Form(

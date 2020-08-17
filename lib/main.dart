@@ -9,6 +9,7 @@ import 'package:hale_mate/views/alarm/alarm.dart';
 import 'package:hale_mate/views/home.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:hale_mate/views/profile.dart';
 
 void main() {
   runApp(HaleMateApp());
