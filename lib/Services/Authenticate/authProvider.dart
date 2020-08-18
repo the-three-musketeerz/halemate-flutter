@@ -14,11 +14,13 @@ class AuthProvider with ChangeNotifier {
   String _token;
   User _userProfile;
   AuthStatusText _notification;
+  List<TrustedContacts> _contacts;
 
   Status get status => _status;
   String get token => _token;
   AuthStatusText get notification => _notification;
   User get userProfile => _userProfile;
+  List<TrustedContacts> get contacts => _contacts;
 
   initAuthProvider() async {
     String token = await getToken();
@@ -83,6 +85,25 @@ class AuthProvider with ChangeNotifier {
 
   //Future<bool> updateTrustedContact : updated the list of trusted contacts
   //for that user
+
+  Future<void> getContacts() async{
+    final url = trustedContactAPI;
+    String token = await getToken();
+    String header = "token $token";
+
+    try {
+      final response = await http.get(url, headers: {"Authorization": header});
+
+      List<TrustedContacts> allcontacts = contactsFromJson(response.body);
+      _contacts = allcontacts;
+      notifyListeners();
+    }
+
+    catch(Exception){
+      print(Exception);
+    }
+}
+
   Future<void> updateTrustedContact(List<TrustedContacts> contacts) async{
 
 
