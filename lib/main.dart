@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hale_mate/Services/Alarm/globalBloc.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/myScaffold.dart';
+import 'package:hale_mate/base/myScaffold.dart';
 import 'package:hale_mate/utlis/router.dart';
 import 'package:hale_mate/views/Authenticate/login.dart';
 import 'package:hale_mate/views/alarm/alarm.dart';
@@ -16,13 +16,11 @@ void main() {
 }
 
 class HaleMateApp extends StatefulWidget {
-
   @override
   _HaleMateAppState createState() => _HaleMateAppState();
 }
 
 class _HaleMateAppState extends State<HaleMateApp> {
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -33,15 +31,14 @@ class _HaleMateAppState extends State<HaleMateApp> {
     //final AuthProvider authProvider = Provider.of<AuthProvider>(context);
     return ChangeNotifierProvider(
         builder: (context) => AuthProvider(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: Router.generateRoute,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => NavigationRouter(),
-      },
-
-      ));
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: Router.generateRoute,
+          initialRoute: '/',
+          routes: {
+            '/': (context) => NavigationRouter(),
+          },
+        ));
   }
 }
 
@@ -51,13 +48,13 @@ class MedReminder extends StatefulWidget {
 }
 
 class _MedReminderState extends State<MedReminder> {
-
   GlobalBloc globalBloc;
 
   void initState() {
     globalBloc = GlobalBloc();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -68,7 +65,7 @@ class _MedReminderState extends State<MedReminder> {
       value: globalBloc,
       child: MaterialApp(
         home: AlarmHomeScreen(),
-       debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
@@ -98,4 +95,3 @@ class NavigationRouter extends StatelessWidget {
     );
   }
 }
-

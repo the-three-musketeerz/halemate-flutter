@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/base/constants.dart';
 
 class AuthStyles {
   static TextStyle defaultStyle = TextStyle(

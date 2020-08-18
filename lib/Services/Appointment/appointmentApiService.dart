@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/base/constants.dart';
 import 'package:hale_mate/models/appointment/Appointment.dart';
 import 'package:hale_mate/models/appointment/Doctor.dart';
 import 'package:hale_mate/models/appointment/Hospital.dart';

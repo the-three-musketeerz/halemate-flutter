@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Alert/alertService.dart';
-import 'package:hale_mate/myScaffold.dart';
+import 'package:hale_mate/base/myScaffold.dart';
 import 'package:hale_mate/views//Authenticate/login.dart';
 import 'package:hale_mate/views/Appointment/appointment.dart';
 import 'package:hale_mate/views/Appointment/createAppointment.dart';

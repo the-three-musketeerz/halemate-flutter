@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hale_mate/Services/Alarm/createAlarmBlock.dart';
 import 'package:hale_mate/Services/Alarm/globalBloc.dart';
-import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/base/constants.dart';
 import 'package:hale_mate/models/reminder/Enum.dart';
 import 'package:hale_mate/models/reminder/medicine.dart';
 import 'package:hale_mate/views/alarm/alarm.dart';

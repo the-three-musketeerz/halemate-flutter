@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/base/constants.dart';
 import 'package:hale_mate/views/Authenticate/login.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStatus.dart';

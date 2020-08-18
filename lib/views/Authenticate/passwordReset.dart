@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'login.dart';
 
 class ForgotPasswordForm extends StatefulWidget {
-
   ForgotPasswordForm({Key key}) : super(key: key);
 
   static const String id = 'ForgotPassword';
@@ -16,8 +15,6 @@ class ForgotPasswordForm extends StatefulWidget {
   @override
   ForgotPasswordFormState createState() => ForgotPasswordFormState();
 }
-
-
 
 class ForgotPasswordFormState extends State<ForgotPasswordForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -27,8 +24,6 @@ class ForgotPasswordFormState extends State<ForgotPasswordForm> {
   String message = "";
   String email;
 
-
-
   Future<void> forgotMyPassword() async {
     final form = _formKey.currentState;
     if (form.validate()) {
@@ -37,7 +32,7 @@ class ForgotPasswordFormState extends State<ForgotPasswordForm> {
       if (success) {
         var route = new MaterialPageRoute(
           builder: (BuildContext context) =>
-          new ResetPasswordView(emailValue: _textController.text),
+              new ResetPasswordView(emailValue: _textController.text),
         );
         Navigator.of(context).push(route);
       } else {
@@ -47,8 +42,6 @@ class ForgotPasswordFormState extends State<ForgotPasswordForm> {
       }
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +65,11 @@ class ForgotPasswordFormState extends State<ForgotPasswordForm> {
                           SizedBox(height: 20.0),
                           Consumer<AuthProvider>(
                             builder: (context, provider, child) =>
-                            provider.notification ?? AuthStatusText(''),
+                                provider.notification ?? AuthStatusText(''),
                           ),
                           SizedBox(height: 30.0),
                           TextFormField(
-                            controller: _textController,
+                              controller: _textController,
                               decoration: AuthStyles.input.copyWith(
                                 hintText: 'Enter Email',
                               ),
@@ -93,14 +86,8 @@ class ForgotPasswordFormState extends State<ForgotPasswordForm> {
                           ),
                         ],
                       ),
-                    )
-                )
-            )
-        )
-    );
+                    )))));
   }
-
-
 }
 
 class ResetPasswordView extends StatefulWidget {
@@ -115,19 +102,16 @@ class ResetPasswordView extends StatefulWidget {
 class _ResetPasswordViewState extends State<ResetPasswordView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
   String password;
   String confirmPassword;
   String message = '';
   String OTP;
 
-
-
   Future<void> resetMyPassword() async {
     final form = _formKey.currentState;
     if (form.validate()) {
-      bool success =
-      await Provider.of<AuthProvider>(context).resetPassword(widget.emailValue, OTP, password);
+      bool success = await Provider.of<AuthProvider>(context)
+          .resetPassword(widget.emailValue, OTP, password);
       if (success) {
         Navigator.pushNamed(context, LogInForm.id);
       } else {
@@ -166,14 +150,14 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                           ),
                           SizedBox(height: 30.0),
                           TextFormField(
-                            keyboardType: TextInputType.numberWithOptions(),
+                              keyboardType: TextInputType.numberWithOptions(),
                               decoration: AuthStyles.input.copyWith(
                                 hintText: 'Enter OTP',
-
                               ),
                               validator: (value) {
                                 OTP = value.trim();
-                                return Validate.requiredField(value, "Enter the correct OTP");
+                                return Validate.requiredField(
+                                    value, "Enter the correct OTP");
                               }),
                           SizedBox(height: 15.0),
                           TextFormField(
@@ -182,7 +166,8 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                               ),
                               validator: (value) {
                                 password = value.trim();
-                                return Validate.requiredField(value, "New password is required");
+                                return Validate.requiredField(
+                                    value, "New password is required");
                               }),
                           SizedBox(height: 15.0),
                           TextFormField(
@@ -202,12 +187,6 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                           ),
                         ],
                       ),
-                    )
-                )
-            )
-        )
-    );
+                    )))));
   }
 }
-
-

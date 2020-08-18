@@ -2,8 +2,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/constants.dart';
-import 'package:hale_mate/myScaffold.dart';
+import 'package:hale_mate/base/constants.dart';
+import 'package:hale_mate/base/myScaffold.dart';
 import 'package:hale_mate/utlis/validator.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
@@ -27,24 +27,20 @@ class LogInFormState extends State<LogInForm> {
   String message = '';
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-
-
-
   Future<void> submit() async {
     final form = _formKey.currentState;
 
-
     if (form.validate()) {
-      bool success = await Provider.of<AuthProvider>(context).login(email, password);
+      bool success =
+          await Provider.of<AuthProvider>(context).login(email, password);
       if (success == true) {
-       await _firebaseMessaging.getToken().then((fcmToken) => Provider.of<AuthProvider>(context).registerDevice(fcmToken)
-        );
-       await Navigator.pushNamed(context, MyScaffold.id);
-      } else{
+        await _firebaseMessaging.getToken().then((fcmToken) =>
+            Provider.of<AuthProvider>(context).registerDevice(fcmToken));
+        await Navigator.pushNamed(context, MyScaffold.id);
+      } else {
         Navigator.pop(context);
       }
-    }else{
-
+    } else {
       setState(() {
         message = "Please give valid login credentials";
       });
@@ -54,23 +50,22 @@ class LogInFormState extends State<LogInForm> {
   @override
   Widget build(BuildContext context) {
     return Material(
-
-      child: SingleChildScrollView(
+        child: SingleChildScrollView(
             child: Container(
                 margin: EdgeInsets.all(15.0),
                 child: Form(
                     key: _formKey,
                     child: Center(
-
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            margin: EdgeInsets.only(top:50.0, bottom: 20.0),
-                            height: 100,
-                          width: 100,
-                          child: new Image(image: AssetImage('assets/logo.png'))),
+                              margin: EdgeInsets.only(top: 50.0, bottom: 20.0),
+                              height: 100,
+                              width: 100,
+                              child: new Image(
+                                  image: AssetImage('assets/logo.png'))),
                           Text(
                             'Login',
                             textAlign: TextAlign.center,
@@ -117,7 +112,8 @@ class LogInFormState extends State<LogInForm> {
                                   ),
                                   TextSpan(
                                     text: 'Register.',
-                                    style: AuthStyles.p.copyWith(color: colorDark),
+                                    style:
+                                        AuthStyles.p.copyWith(color: colorDark),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () => {
                                             Navigator.pushNamed(
@@ -133,8 +129,8 @@ class LogInFormState extends State<LogInForm> {
                             child: RichText(
                               text: TextSpan(
                                   text: 'Forgot Your Password?',
-                                  style: AuthStyles.p
-                                      .copyWith(color: colorDark),
+                                  style:
+                                      AuthStyles.p.copyWith(color: colorDark),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () => {
                                           Navigator.pushNamed(
@@ -144,10 +140,6 @@ class LogInFormState extends State<LogInForm> {
                           ),
                         ],
                       ),
-                    )
-                )
-            )
-        )
-    );
+                    )))));
   }
 }

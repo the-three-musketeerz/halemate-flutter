@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:hale_mate/Services/Appointment/appointmentProvider.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/constants.dart';
-import 'package:hale_mate/myScaffold.dart';
+import 'package:hale_mate/base/constants.dart';
+import 'package:hale_mate/base/myScaffold.dart';
 import 'package:hale_mate/utlis/validator.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStyles.dart';
 import 'package:provider/provider.dart';
-import 'package:after_init/after_init.dart';
 
 
 class CreateAppointmentWidget extends StatelessWidget{

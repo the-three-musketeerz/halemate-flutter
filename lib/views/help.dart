@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hale_mate/myScaffold.dart';
-import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/base/myScaffold.dart';
+import 'package:hale_mate/base/constants.dart';
 import 'package:hale_mate/models/help/helpData.dart';
 
 

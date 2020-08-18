@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/base/constants.dart';
 import 'package:hale_mate/views/Appointment/appointment.dart';
 import 'package:hale_mate/views/Authenticate/changepassword.dart';
 import 'package:hale_mate/views/help.dart';
@@ -8,7 +8,7 @@ import 'package:hale_mate/views/home.dart';
 import 'package:provider/provider.dart';
 import 'package:hale_mate/views/profile.dart';
 
-import 'main.dart';
+import '../main.dart';
 
 class MyScaffold extends StatelessWidget {
   static const String id = "scaffold";
@@ -56,19 +56,19 @@ class HomeDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: ListView(children: <Widget>[
-        SizedBox(height: 20.0),
-        Text(
+      SizedBox(height: 20.0),
+      Text(
         "Welcome to HaleMate!",
         textAlign: TextAlign.center,
         style: TextStyle(
             color: colorLight, fontWeight: FontWeight.bold, fontSize: 25.0),
       ),
-        SizedBox(height: 20.0),
-         new Image(image: AssetImage('assets/drawerImage.jpg')),
-        Container(
+      SizedBox(height: 20.0),
+      new Image(image: AssetImage('assets/drawerImage.jpg')),
+      Container(
         height: MediaQuery.of(context).size.height,
         color: Colors.white,
-          child: Column(
+        child: Column(
           children: <Widget>[
             ListTile(
               dense: true,
@@ -130,4 +130,3 @@ class HomeDrawer extends StatelessWidget {
     ]));
   }
 }
-

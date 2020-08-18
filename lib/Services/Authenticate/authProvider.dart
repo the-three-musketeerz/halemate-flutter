@@ -1,13 +1,19 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/base/constants.dart';
 import 'package:hale_mate/models/user/User.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStatus.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated, Unregistered }
+enum Status {
+  Uninitialized,
+  Authenticated,
+  Authenticating,
+  Unauthenticated,
+  Unregistered
+}
 
 class AuthProvider with ChangeNotifier {
   Status _status = Status.Uninitialized;
@@ -40,19 +46,17 @@ class AuthProvider with ChangeNotifier {
     final response = await http.get(url, headers: {"Authorization": header});
 
     if (response.statusCode == 200) {
-
       print("called getUser");
 
       dynamic a = json.decode(response.body);
 
       Map<String, dynamic> apiResponse = (json.decode(response.body))[0];
       User newUser = new User(
-        email: apiResponse['email'],
-        medicalRecord: apiResponse['medical_history'],
-        userId: apiResponse['id'],
-        name: apiResponse['name'],
-        phoneNumber: apiResponse['phoneNumber']
-      );
+          email: apiResponse['email'],
+          medicalRecord: apiResponse['medical_history'],
+          userId: apiResponse['id'],
+          name: apiResponse['name'],
+          phoneNumber: apiResponse['phoneNumber']);
       _userProfile = newUser;
       await storeUserId(apiResponse);
       notifyListeners();
@@ -83,9 +87,7 @@ class AuthProvider with ChangeNotifier {
 
   //Future<bool> updateTrustedContact : updated the list of trusted contacts
   //for that user
-  Future<void> updateTrustedContact(List<TrustedContacts> contacts) async{
-
-
+  Future<void> updateTrustedContact(List<TrustedContacts> contacts) async {
     contacts.map((e) => e.toJson());
     List<Map<String, dynamic>> body;
 
@@ -144,14 +146,14 @@ class AuthProvider with ChangeNotifier {
     }
 
     _status = Status.Unauthenticated;
-    _notification = AuthStatusText('An unknown error occured! Please try again in sometime');
+    _notification = AuthStatusText(
+        'An unknown error occured! Please try again in sometime');
     notifyListeners();
     return false;
   }
 
   Future<Map> register(String name, String email, String password,
       String passwordConfirm, String phone) async {
-
     _notification = null;
     final url = signupAPI;
 
@@ -263,8 +265,7 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> changePassword(
-      String oldPassword, String newPassword) async {
+  Future<bool> changePassword(String oldPassword, String newPassword) async {
     final url = changePasswordAPI;
 
     String token = await getToken();
@@ -316,7 +317,6 @@ class AuthProvider with ChangeNotifier {
 
   Future<bool> verifyOTP(String OTP, String email) async {
     final url = otpVerifyAPI;
-
 
     Map<String, dynamic> body = {'email': email, 'OTP': OTP};
 

@@ -3,7 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hale_mate/Services/Appointment/appointmentProvider.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
-import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/base/constants.dart';
 import 'package:hale_mate/models/appointment/Appointment.dart';
 import 'package:hale_mate/views/Appointment/createAppointment.dart';
 import 'package:intl/intl.dart';
