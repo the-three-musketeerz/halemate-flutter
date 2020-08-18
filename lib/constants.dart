@@ -8,7 +8,7 @@ const colorDark = const Color(0xff008c8c);
 
 
 
-const String baseAPI = 'http://b06ba43d1453.ngrok.io/halemate';
+const String baseAPI = 'http://halemate-backend.southeastasia.cloudapp.azure.com:8000/halemate';
 
 const String userProfileAPI = '$baseAPI/user/';
 
