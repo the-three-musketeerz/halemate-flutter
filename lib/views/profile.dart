@@ -30,36 +30,42 @@ class ProfileState extends State<Profile>{
           icon: new Icon(Icons.arrow_back),
           onPressed: () => Navigator.pushNamed(context, MyScaffold.id),
         ),),
-      body: Container(
-        margin: EdgeInsets.all(10),
-        child: Container(
-          height: 220,
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+      body: userProfile == null ?
+          Container(
+            child: Center(
+              child: CircularProgressIndicator()
             ),
-            elevation: 3,
-            margin: EdgeInsets.all(10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text(userProfile.name),
-                ),
-                ListTile(
-                  leading: Icon(Icons.mail),
-                  title: Text(userProfile.email),
-                ),
-                ListTile(
-                  leading: Icon(Icons.phone),
-                  title: Text(userProfile.phoneNumber),
-                ),
-              ],
+          ):
+      Container(
+          margin: EdgeInsets.all(10),
+          child: Container(
+            height: 220,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              elevation: 3,
+              margin: EdgeInsets.all(10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text(userProfile.name),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.mail),
+                    title: Text(userProfile.email),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.phone),
+                    title: Text(userProfile.phoneNumber),
+                  ),
+                ],
+              ),
             ),
-          ),
-        )
-        ),
+          )
+      ),
       );
   }
 }

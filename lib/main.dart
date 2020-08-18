@@ -81,6 +81,7 @@ class NavigationRouter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
       builder: (context, user, child) {
+        print(user.status);
         switch (user.status) {
           case Status.Unauthenticated:
             return LogInForm();

@@ -33,7 +33,6 @@ class AppointmentsState extends State<Appointments>{
   Widget build(BuildContext context) {
 
     final appointments = Provider.of<AppointmentProvider>(context).appointments;
-    print(appointments);
 
     return Scaffold(
       body: appointmentList(context, appointments),
@@ -52,7 +51,7 @@ class AppointmentsState extends State<Appointments>{
 
 Widget appointmentList(BuildContext context, List<Appointment> appointments){
   DateFormat dateFormat = DateFormat("HH:mm:ss dd-MM-yyyy ");
-  return (appointments.length != 0)?
+  return (appointments != null && appointments.length !=0)?
     ListView.builder(
       itemBuilder: (BuildContext context, int index){
         final appointment = appointments[index];
@@ -135,5 +134,4 @@ Widget appointmentList(BuildContext context, List<Appointment> appointments){
           ),
     ),
   );
-
 }

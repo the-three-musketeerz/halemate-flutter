@@ -50,7 +50,7 @@ class AuthProvider with ChangeNotifier {
         phoneNumber: apiResponse['phoneNumber']
       );
       _userProfile = newUser;
-      await storeUserData(apiResponse);
+      await storeUserId(apiResponse);
       notifyListeners();
     }
   }
@@ -304,8 +304,12 @@ class AuthProvider with ChangeNotifier {
 
   storeUserData(apiResponse) async {
     SharedPreferences storage = await SharedPreferences.getInstance();
-    await storage.setInt('id', apiResponse['id']);
     await storage.setString('token', apiResponse['token']);
+  }
+
+  storeUserId(apiResponse) async {
+    SharedPreferences storage = await SharedPreferences.getInstance();
+    await storage.setInt('id', apiResponse['id']);
   }
 
   Future<String> getToken() async {

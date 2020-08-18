@@ -32,14 +32,15 @@ class AppointmentApiService{
 //  }
 
   Future<List<Appointment>> getAppointments() async{
-    token = await authProvider.getToken();
+    String token =  await authProvider.getToken();
     final response = await http.get(
       api,
       headers:{
         HttpHeaders.authorizationHeader: 'token $token'
       },
     );
-
+    print('token $token');
+    print(response.body);
     List<Appointment> appointments = appointmentFromJson(response.body);
 
     return appointments;
@@ -52,6 +53,7 @@ class AppointmentApiService{
         HttpHeaders.authorizationHeader: 'token $token'
       },
     );
+    print('here');
     List<Hospital> hospitals = hospitalFromJson(response.body);
 
     return hospitals;
