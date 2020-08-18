@@ -8,8 +8,8 @@ import 'package:hale_mate/views/Authenticate/otpVerify.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
 import 'package:hale_mate/views/profile.dart';
+import 'package:hale_mate/views/selectContacts.dart';
 import 'package:hale_mate/views/help.dart';
-
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -30,6 +30,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => CreateAppointmentWidget());
       case OTPVerificationScreen.id:
         return MaterialPageRoute(builder: (_) => OTPVerificationScreen());
+      case Contacts.id:
+        return MaterialPageRoute(builder: (_) => Contacts());
       case MyScaffold.id:
         return MaterialPageRoute(builder: (_) => MyScaffold());
       case Profile.id:
