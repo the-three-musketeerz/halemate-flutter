@@ -80,7 +80,26 @@ class AuthProvider with ChangeNotifier {
   //Future<bool> updateTrustedContact : updated the list of trusted contacts
   //for that user
   Future<void> updateTrustedContact(List<TrustedContacts> contacts) async{
-    contacts.map((e) => e.toJson());
+    List<Map<String, dynamic>> body;
+
+    int userId = await getUserId();
+
+    contacts.map((e) => body.add(e.toJson()));
+    body.map((e) => e['user'] = userId);
+
+    String token = await getToken();
+    String header = "token $token";
+
+    final url = trustedContactAPI;
+
+    final response =
+        await http.post(url, headers: {"Authorization": header}, body: body);
+
+    if (response.statusCode == 201) {
+      //Trusted Contacts updated successfully!
+      _userProfile.trustedContacts = contacts;
+      notifyListeners();
+    }
   }
 
   Future<bool> login(String email, String password) async {
