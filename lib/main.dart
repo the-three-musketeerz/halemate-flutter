@@ -9,6 +9,7 @@ import 'package:hale_mate/views/alarm/alarm.dart';
 import 'package:hale_mate/views/home.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:hale_mate/views/profile.dart';
 
 void main() {
   runApp(HaleMateApp());
@@ -80,6 +81,7 @@ class NavigationRouter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
       builder: (context, user, child) {
+        print(user.status);
         switch (user.status) {
           case Status.Unauthenticated:
             return LogInForm();

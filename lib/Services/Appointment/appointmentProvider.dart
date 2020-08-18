@@ -48,9 +48,27 @@ class AppointmentProvider with ChangeNotifier{
     }
   }
 
+  Future<void> getAppointments() async{
+    try{
+      List<Appointment> appointmentsResponse = await appointmentApiService.getAppointments();
+
+      _initialized = true;
+      _appointments = appointmentsResponse;
+
+      notifyListeners();
+    }
+    on AuthException {
+      // API returned a AuthException, so user is logged out.
+      await authProvider.logOut(true);
+    }
+    catch(Exception){
+      print(Exception);
+    }
+  }
+
   Future<void> getHospitals() async{
 
-    try{
+   try{
       List<Hospital> hospitalList = await appointmentApiService.getHospitals();
 
       _hospitals = hospitalList;
@@ -67,10 +85,9 @@ class AppointmentProvider with ChangeNotifier{
   }
 
   Future<void> getDoctors(int id) async{
-
+  print('called');
     try{
       List<Doctor> doctorList = await appointmentApiService.getDoctors(id);
-
       _doctors = doctorList;
       notifyListeners();
     }

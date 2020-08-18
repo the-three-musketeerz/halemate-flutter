@@ -5,6 +5,7 @@ import 'package:hale_mate/views/Appointment/appointment.dart';
 import 'package:hale_mate/views/help.dart';
 import 'package:hale_mate/views/home.dart';
 import 'package:provider/provider.dart';
+import 'package:hale_mate/views/profile.dart';
 
 import 'main.dart';
 
@@ -86,7 +87,9 @@ class HomeDrawer extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
               ),
               leading: Icon(Icons.person),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, Profile.id);
+              },
             ),
             ListTile(
               title: Text(

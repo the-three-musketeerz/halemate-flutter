@@ -1,13 +1,15 @@
+import 'package:after_init/after_init.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:hale_mate/Services/Appointment/appointmentProvider.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/constants.dart';
+import 'package:hale_mate/myScaffold.dart';
 import 'package:hale_mate/utlis/validator.dart';
-import 'package:hale_mate/views/Appointment/appointment.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStyles.dart';
 import 'package:provider/provider.dart';
+
 
 class CreateAppointmentWidget extends StatelessWidget{
   static const String id = 'CreateAppointment';
@@ -26,7 +28,7 @@ class CreateAppointment extends StatefulWidget{
   _CreateAppointmentState createState() => _CreateAppointmentState();
 }
 
-class _CreateAppointmentState extends State<CreateAppointment>{
+class _CreateAppointmentState extends State<CreateAppointment> with AfterInitMixin<CreateAppointment>{
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String patientName;
@@ -38,26 +40,37 @@ class _CreateAppointmentState extends State<CreateAppointment>{
     final form = _formKey.currentState;
     if(form.validate()){
       await Provider.of<AppointmentProvider>(context).createAppointment(patientName, hospital, doctor, reason);
-      Navigator.pushNamed(context, AppointmentWidget.id);
+      Navigator.pushNamed(context, MyScaffold.id);
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  void didInitState() {
     Provider.of<AppointmentProvider>(context).getHospitals();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final hospitals = Provider.of<AppointmentProvider>(context).hospitals;
     final doctors = Provider.of<AppointmentProvider>(context).doctors;
     List<Map<String, dynamic>> hospitalList = hospitals.where((element) => true).map((e) => {'value':e.id, 'text':e.name}).toList();
 
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Create Appointment"),
+          backgroundColor: colorDark,
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pushNamed(context, MyScaffold.id),
+          ),),
       body: Container(
         margin: EdgeInsets.all(25.0),
         child: Form(
           key: _formKey,
-          child: Center(
+          child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
+              //mainAxisAlignment: MainAxisAlignment.center,
               children:<Widget>[
                 Text(
                   'New Appointment',
@@ -121,6 +134,7 @@ class _CreateAppointmentState extends State<CreateAppointment>{
                     },
                     onChanged: (value){
                       doctor = value;
+                      print(value);
                     },
                     dataSource: doctors.where((element) => true).map((e) => {'value':e.id, 'text':e.name+'  ('+e.specialization+')'}).toList(),
                     textField: 'text',

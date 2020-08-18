@@ -8,6 +8,7 @@ import 'package:hale_mate/models/appointment/Appointment.dart';
 import 'package:hale_mate/views/Appointment/createAppointment.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:hale_mate/myScaffold.dart';
 
 class AppointmentWidget extends StatelessWidget{
   static const String id = 'Appointment';
@@ -51,7 +52,7 @@ class AppointmentsState extends State<Appointments>{
 
 Widget appointmentList(BuildContext context, List<Appointment> appointments){
   DateFormat dateFormat = DateFormat("HH:mm:ss dd-MM-yyyy ");
-  return (appointments.length != 0)?
+  return (appointments != null && appointments.length !=0)?
     ListView.builder(
       itemBuilder: (BuildContext context, int index){
         final appointment = appointments[index];
@@ -145,5 +146,7 @@ Widget appointmentList(BuildContext context, List<Appointment> appointments){
       ],
 
   ));
+
+
 
 }
