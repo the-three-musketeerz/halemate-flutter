@@ -89,6 +89,8 @@ class NavigationRouter extends StatelessWidget {
             return MyScaffold();
           case Status.Uninitialized:
             return LogInForm();
+          case Status.Authenticating:
+            return LogInForm();
           default:
             return MyScaffold();
         }

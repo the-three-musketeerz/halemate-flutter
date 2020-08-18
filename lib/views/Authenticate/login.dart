@@ -36,12 +36,15 @@ class LogInFormState extends State<LogInForm> {
 
     if (form.validate()) {
       bool success = await Provider.of<AuthProvider>(context).login(email, password);
-      if (success) {
+      if (success == true) {
        await _firebaseMessaging.getToken().then((fcmToken) => Provider.of<AuthProvider>(context).registerDevice(fcmToken)
         );
-       Navigator.pushNamed(context, MyScaffold.id);
+       await Navigator.pushNamed(context, MyScaffold.id);
+      } else{
+        Navigator.pop(context);
       }
     }else{
+
       setState(() {
         message = "Please give valid login credentials";
       });

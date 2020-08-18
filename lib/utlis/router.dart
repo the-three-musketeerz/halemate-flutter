@@ -4,6 +4,7 @@ import 'package:hale_mate/myScaffold.dart';
 import 'package:hale_mate/views//Authenticate/login.dart';
 import 'package:hale_mate/views/Appointment/appointment.dart';
 import 'package:hale_mate/views/Appointment/createAppointment.dart';
+import 'package:hale_mate/views/Authenticate/changepassword.dart';
 import 'package:hale_mate/views/Authenticate/otpVerify.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
@@ -31,6 +32,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => CreateAppointmentWidget());
       case OTPVerificationScreen.id:
         return MaterialPageRoute(builder: (_) => OTPVerificationScreen());
+      case ChangePasswordForm.id:
+        return MaterialPageRoute(builder: (_) => ChangePasswordForm());
       case Contacts.id:
         return MaterialPageRoute(builder: (_) => Contacts());
       case MyScaffold.id:

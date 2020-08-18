@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/constants.dart';
 import 'package:hale_mate/views/Appointment/appointment.dart';
+import 'package:hale_mate/views/Authenticate/changepassword.dart';
 import 'package:hale_mate/views/help.dart';
 import 'package:hale_mate/views/home.dart';
 import 'package:provider/provider.dart';
@@ -109,7 +110,7 @@ class HomeDrawer extends StatelessWidget {
               ),
               leading: Icon(Icons.settings),
               onTap: () {
-                // Navigator.pushNamed(context, "/settings");
+                Navigator.pushNamed(context, ChangePasswordForm.id);
               },
             ),
             ListTile(

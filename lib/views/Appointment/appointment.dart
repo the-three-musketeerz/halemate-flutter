@@ -8,7 +8,6 @@ import 'package:hale_mate/models/appointment/Appointment.dart';
 import 'package:hale_mate/views/Appointment/createAppointment.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:hale_mate/myScaffold.dart';
 
 class AppointmentWidget extends StatelessWidget{
   static const String id = 'Appointment';

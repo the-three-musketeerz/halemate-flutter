@@ -7,7 +7,7 @@ import 'package:hale_mate/views/Authenticate/widgets/AuthStatus.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
+enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated, Unregistered }
 
 class AuthProvider with ChangeNotifier {
   Status _status = Status.Uninitialized;
@@ -128,15 +128,15 @@ class AuthProvider with ChangeNotifier {
 
     if (response.statusCode == 200) {
       Map<String, dynamic> apiResponse = json.decode(response.body);
-      _status = Status.Authenticated;
       _token = apiResponse['token'];
       print(_token);
       await storeUserData(apiResponse);
+      _status = Status.Authenticated;
       notifyListeners();
       return true;
     }
 
-    if (response.statusCode == 401) {
+    if (response.statusCode == 400) {
       _status = Status.Unauthenticated;
       _notification = AuthStatusText('Invalid email or password.');
       notifyListeners();
@@ -144,13 +144,15 @@ class AuthProvider with ChangeNotifier {
     }
 
     _status = Status.Unauthenticated;
-    _notification = AuthStatusText('Server error.');
+    _notification = AuthStatusText('An unknown error occured! Please try again in sometime');
     notifyListeners();
     return false;
   }
 
   Future<Map> register(String name, String email, String password,
       String passwordConfirm, String phone) async {
+
+    _notification = null;
     final url = signupAPI;
 
     {
@@ -209,6 +211,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<bool> forgotPassword(String email) async {
+    _notification = null;
     final url = forgotPasswordAPI;
 
     Map<String, String> body = {'email': email};
@@ -260,7 +263,42 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
+  Future<bool> changePassword(
+      String oldPassword, String newPassword) async {
+    final url = changePasswordAPI;
+
+    String token = await getToken();
+    String header = "token $token";
+
+    Map<String, String> body = {
+      'old_password': oldPassword,
+      'new_password': newPassword
+    };
+
+    final response = await http.post(
+      url,
+      headers: {"Authorization": header},
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      _notification = AuthStatusText(
+          'Your Password has been reset successfully! Login to continue',
+          type: 'info');
+      notifyListeners();
+      return true;
+    }
+
+    if (response.statusCode == 409) {
+      _notification = AuthStatusText('Invalid OTP! Please enter correct OTP',
+          type: 'error');
+      notifyListeners();
+      return false;
+    }
+  }
+
   Future<bool> sendOTP(String method, String email) async {
+    _notification = null;
     final url = signupVerifyAPI;
 
     Map<String, String> body = {'email': email, 'verification_method': method};
@@ -278,6 +316,7 @@ class AuthProvider with ChangeNotifier {
 
   Future<bool> verifyOTP(String OTP, String email) async {
     final url = otpVerifyAPI;
+
 
     Map<String, dynamic> body = {'email': email, 'OTP': OTP};
 
