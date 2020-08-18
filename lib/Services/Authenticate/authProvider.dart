@@ -40,7 +40,7 @@ class AuthProvider with ChangeNotifier {
     final response = await http.get(url, headers: {"Authorization": header});
 
     if (response.statusCode == 200) {
-      dynamic a = json.decode(response.body);
+      print("called getUser");
       Map<String, dynamic> apiResponse = (json.decode(response.body))[0];
       User newUser = new User(
         email: apiResponse['email'],

@@ -9,6 +9,7 @@ import 'package:hale_mate/views/Appointment/appointment.dart';
 import 'package:hale_mate/views/Authenticate/widgets/AuthStyles.dart';
 import 'package:provider/provider.dart';
 import 'package:hale_mate/myScaffold.dart';
+import 'package:after_init/after_init.dart';
 
 class CreateAppointmentWidget extends StatelessWidget{
   static const String id = 'CreateAppointment';
@@ -27,7 +28,7 @@ class CreateAppointment extends StatefulWidget{
   _CreateAppointmentState createState() => _CreateAppointmentState();
 }
 
-class _CreateAppointmentState extends State<CreateAppointment>{
+class _CreateAppointmentState extends State<CreateAppointment> with AfterInitMixin<CreateAppointment>{
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String patientName;
@@ -44,8 +45,12 @@ class _CreateAppointmentState extends State<CreateAppointment>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  void didInitState() {
     Provider.of<AppointmentProvider>(context).getHospitals();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final hospitals = Provider.of<AppointmentProvider>(context).hospitals;
     final doctors = Provider.of<AppointmentProvider>(context).doctors;
     List<Map<String, dynamic>> hospitalList = hospitals.where((element) => true).map((e) => {'value':e.id, 'text':e.name}).toList();
@@ -62,10 +67,10 @@ class _CreateAppointmentState extends State<CreateAppointment>{
         margin: EdgeInsets.all(25.0),
         child: Form(
           key: _formKey,
-          child: Center(
+          child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
+              //mainAxisAlignment: MainAxisAlignment.center,
               children:<Widget>[
                 Text(
                   'New Appointment',
@@ -129,6 +134,7 @@ class _CreateAppointmentState extends State<CreateAppointment>{
                     },
                     onChanged: (value){
                       doctor = value;
+                      print(value);
                     },
                     dataSource: doctors.where((element) => true).map((e) => {'value':e.id, 'text':e.name+'  ('+e.specialization+')'}).toList(),
                     textField: 'text',

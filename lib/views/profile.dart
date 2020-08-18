@@ -1,11 +1,12 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:hale_mate/utlis/validator.dart';
 import 'package:provider/provider.dart';
 import 'package:hale_mate/constants.dart';
 import 'package:hale_mate/myScaffold.dart';
+import 'package:after_init/after_init.dart';
 
-import 'package:hale_mate/models/user/User.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 
 class Profile extends StatefulWidget{
@@ -14,12 +15,16 @@ class Profile extends StatefulWidget{
   ProfileState createState () => ProfileState();
 }
 
-class ProfileState extends State<Profile>{
+class ProfileState extends State<Profile> with AfterInitMixin<Profile>{
+
+  @override
+  void didInitState() {
+    Provider.of<AuthProvider>(context).getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
-
     final authProvider = Provider.of<AuthProvider>(context);
-    authProvider.getUser();
     final userProfile = authProvider.userProfile;
 
     return Scaffold(
