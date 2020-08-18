@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/constants.dart';
-import 'package:hale_mate/models/alert/Alert.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,7 +20,7 @@ class _AlertWidgetState extends State<AlertWidget> {
   final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
   Position currentPosition;
   AuthProvider authProvider;
-  List<Alert> hospitalList = List<Alert>();
+  List hospitalList = new List();
 
   Future<void> submit() async {
     bool success = await sendAlertForMe(_getCurrentLocation());
@@ -47,12 +46,52 @@ class _AlertWidgetState extends State<AlertWidget> {
   }
 
   Future<void> getHospitals() async{
-    await reportAlert(_getCurrentLocation()).then((value) {
-      setState(() {
-        hospitalList.addAll(value);
+    List hospitals = await reportAlert(_getCurrentLocation());
+    if(hospitals!= null){
+
+      this.setState(() {
+        hospitalList.addAll(hospitals);
+        print(hospitalList[1]);
       });
-    });
-  }
+      return showDialog(context: context,
+      builder: (BuildContext context){
+        return new AlertDialog(
+          title: Text("Nearby Hospitals", style: TextStyle(
+            color: colorDark
+          ),),
+          content: new  Container(
+            width: double.maxFinite,
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: hospitalList.length,
+              itemBuilder: (context, position) {
+                return Card(
+                  child: ListTile(
+                    title: Text(
+                      '${hospitalList[position]['hospitalName']}',
+
+                      style: TextStyle(
+                          fontSize: 18.0,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    subtitle: Text("${hospitalList[position]['address']}", style: TextStyle(
+                        color: Colors.grey
+                    ),),
+                    trailing: IconButton(
+                        icon: Icon(Icons.call, color: Colors.black),
+                        onPressed: () {
+                          launch("tel:${hospitalList[position]['phoneNumber']}");
+                        }
+                    ),
+                  ),
+                );}
+          ),
+        ));
+      });
+    }}
+
 
   Position _getCurrentLocation() {
     final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
@@ -73,10 +112,9 @@ class _AlertWidgetState extends State<AlertWidget> {
     return currentPosition;
   }
 
-  Future<List<Alert>> reportAlert(Position location) async {
+  Future<List> reportAlert(Position location) async {
 
-
-    var body = {
+    Map<String, String> body = {
       'lat': location.latitude.toString(),
       'lng': location.longitude.toString()
     };
@@ -90,14 +128,18 @@ class _AlertWidgetState extends State<AlertWidget> {
         },
         body: body);
 
-      var listJson = jsonDecode(response.body).cast<Map<String, dynamic>>();
-      var hospitalList = listJson.map<Alert>((json) => Alert.fromJson(json)).toList();
-      print(hospitalList);
+      var listJson = jsonDecode(response.body);
+     //     .cast<Map<String, dynamic>>();
+      //var hospitalList = listJson.map<Alert>((json) => Alert.fromJson(json)).toList();
+      //print(hospitalList);
+    print(listJson[1]['hospitalName']);
       return listJson;
   }
 
+  //post request to send alert to contacts and hospitals
+
   Future<bool> sendAlertForMe(Position location) async {
-    var body = {
+    Map<String, String> body = {
       'lat': location.latitude.toString(),
       'lng': location.longitude.toString()
     };
@@ -147,50 +189,17 @@ class _AlertWidgetState extends State<AlertWidget> {
       ],
     );
   }
-  
-  /*@override
-  Widget list(List<Alert> hospital){
-    return Material(
-      child: Container(
-        child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-          itemCount: hospital.length,
-          itemBuilder: (context, position) {
-            return Card(
-              child: ListTile(
-                  title: Text(
-                    '${hospital[position].hospitalName}',
 
-                    style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
-                subtitle: Text("${hospital[position].hospitalAddress}", style: TextStyle(
-                  color: Colors.grey
-                ),),
-                trailing: IconButton(
-                  icon: Icon(Icons.call, color: Colors.black),
-                  onPressed: () {
-                    launch("${hospital[position].phoneNumber}");
-                  }
-                ),
-              ),
-            );}
-    )));
-  }*/
 }
 
 class HospitalList extends StatelessWidget {
-  final List<Alert> hospital;
+  final List hospital;
+  static const String id = "hospitalList";
 
   const HospitalList({Key key, this.hospital}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: Container(
-            child: ListView.builder(
+    return  ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: hospital.length,
@@ -198,25 +207,25 @@ class HospitalList extends StatelessWidget {
                   return Card(
                     child: ListTile(
                       title: Text(
-                        '${hospital[position].hospitalName}',
+                        '${hospital[position]['hospitalName']}',
 
                         style: TextStyle(
                             fontSize: 18.0,
                             color: Colors.black,
                             fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text("${hospital[position].hospitalAddress}", style: TextStyle(
+                      subtitle: Text("${hospital[position]['address']}", style: TextStyle(
                           color: Colors.grey
                       ),),
                       trailing: IconButton(
                           icon: Icon(Icons.call, color: Colors.black),
                           onPressed: () {
-                            launch("${hospital[position].phoneNumber}");
+                            launch("${hospital[position]['phoneNumber']}");
                           }
                       ),
                     ),
                   );}
-            )));;
+            );
   }
 }
 

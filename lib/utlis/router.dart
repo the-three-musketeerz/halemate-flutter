@@ -31,6 +31,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => OTPVerificationScreen());
       case MyScaffold.id:
         return MaterialPageRoute(builder: (_) => MyScaffold());
+      case HospitalList.id:
+        return MaterialPageRoute(builder: (_) => HospitalList());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

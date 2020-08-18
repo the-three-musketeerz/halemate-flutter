@@ -62,7 +62,7 @@ class HomeDrawer extends StatelessWidget {
             color: colorLight, fontWeight: FontWeight.bold, fontSize: 25.0),
       ),
         SizedBox(height: 20.0),
-         new Image(image: AssetImage('assets/logo.jpg')),
+         new Image(image: AssetImage('assets/drawerImage.jpg')),
         Container(
         height: MediaQuery.of(context).size.height,
         color: Colors.white,
