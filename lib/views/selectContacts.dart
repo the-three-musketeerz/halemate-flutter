@@ -1,3 +1,4 @@
+
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hale_mate/constants.dart';
@@ -11,6 +12,7 @@ class Contacts extends StatelessWidget {
     return MaterialApp(
       title: 'Select trusted contacts',
       home: SelectContactPage(title: 'Select Trusted Contacts'),
+
     );
   }
 }
@@ -122,6 +124,7 @@ class _MySelectedContactsState extends State<SelectContactPage> {
                   border: new OutlineInputBorder(
                     borderSide: new BorderSide(
                       color: colorLight
+
                     )
                   ),
                   prefixIcon: Icon(

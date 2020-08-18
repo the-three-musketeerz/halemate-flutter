@@ -7,12 +7,10 @@ import 'package:hale_mate/views/Appointment/createAppointment.dart';
 import 'package:hale_mate/views/Authenticate/otpVerify.dart';
 import 'package:hale_mate/views/Authenticate/passwordReset.dart';
 import 'package:hale_mate/views/Authenticate/signup.dart';
+import 'package:hale_mate/views/help.dart';
 import 'package:hale_mate/views/profile.dart';
-
-
 import 'package:hale_mate/views/selectContacts.dart';
 
-import 'package:hale_mate/views/help.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {

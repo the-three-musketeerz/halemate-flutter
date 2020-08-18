@@ -6,8 +6,6 @@ import 'package:hale_mate/myScaffold.dart';
 import 'package:hale_mate/views/selectContacts.dart';
 import 'package:provider/provider.dart';
 
-
-
 class Profile extends StatefulWidget {
   static const String id = 'Profile';
   @override
@@ -15,6 +13,7 @@ class Profile extends StatefulWidget {
 }
 
 class ProfileState extends State<Profile> {
+
 
   @override
   void didInitState(){
@@ -32,43 +31,41 @@ class ProfileState extends State<Profile> {
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back),
           onPressed: () => Navigator.pushNamed(context, MyScaffold.id),
-        ),),
-      body: userProfile == null ?
-          Container(
-            child: Center(
-              child: CircularProgressIndicator()
-            ),
-          ):
-      Container(
-          margin: EdgeInsets.all(10),
-          child: Container(
-            height: 220,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              elevation: 3,
-              margin: EdgeInsets.all(10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text(userProfile.name),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.mail),
-                    title: Text(userProfile.email),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.phone),
-                    title: Text(userProfile.phoneNumber),
-                  ),
-                ],
-              ),
-            ),
-          )
+        ),
       ),
+      body: userProfile == null
+          ? Container(
+              child: Center(child: CircularProgressIndicator()),
+            )
+          : Container(
+              margin: EdgeInsets.all(10),
+              child: Container(
+                height: 220,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  elevation: 3,
+                  margin: EdgeInsets.all(10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ListTile(
+                        leading: Icon(Icons.person),
+                        title: Text(userProfile.name),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.mail),
+                        title: Text(userProfile.email),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.phone),
+                        title: Text(userProfile.phoneNumber),
+                      ),
+                    ],
+                  ),
+                ),
+              )),
       floatingActionButton: FloatingActionButton(
         elevation: 4,
         backgroundColor: colorDark,
@@ -77,14 +74,8 @@ class ProfileState extends State<Profile> {
           Navigator.pushNamed(context, Contacts.id);
         },
       ),
-    );
 
+    );
   }
 }
-
-
-
-
-
-
 

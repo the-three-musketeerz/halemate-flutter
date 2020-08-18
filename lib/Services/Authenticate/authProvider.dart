@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hale_mate/constants.dart';
 import 'package:hale_mate/models/user/User.dart';
@@ -84,8 +85,8 @@ class AuthProvider with ChangeNotifier {
   //for that user
   Future<void> updateTrustedContact(List<TrustedContacts> contacts) async{
 
-    contacts.map((e) => e.toJson());
 
+    contacts.map((e) => e.toJson());
     List<Map<String, dynamic>> body;
 
     int userId = await getUserId();
@@ -106,7 +107,6 @@ class AuthProvider with ChangeNotifier {
       _userProfile.trustedContacts = contacts;
       notifyListeners();
     }
-
   }
 
   Future<bool> login(String email, String password) async {
