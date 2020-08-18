@@ -5,6 +5,7 @@ import 'package:hale_mate/constants.dart';
 import 'package:hale_mate/myScaffold.dart';
 import 'package:hale_mate/views/selectContacts.dart';
 import 'package:provider/provider.dart';
+import 'package:after_init/after_init.dart';
 
 class Profile extends StatefulWidget {
   static const String id = 'Profile';
@@ -12,7 +13,7 @@ class Profile extends StatefulWidget {
   ProfileState createState() => ProfileState();
 }
 
-class ProfileState extends State<Profile> {
+class ProfileState extends State<Profile> with AfterInitMixin<Profile> {
 
 
   @override
