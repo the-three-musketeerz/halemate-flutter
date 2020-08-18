@@ -7,6 +7,7 @@ import 'package:hale_mate/views/selectContacts.dart';
 import 'package:provider/provider.dart';
 import 'package:after_init/after_init.dart';
 import 'package:hale_mate/models/user/User.dart';
+import 'package:hale_mate/views/createContact.dart';
 
 class Profile extends StatefulWidget {
   static const String id = 'Profile';
@@ -93,7 +94,7 @@ class ProfileState extends State<Profile> with AfterInitMixin<Profile> {
                             ]
                       ),
                     ),
-                  )
+                  ),
                 ],
               )
 
@@ -103,7 +104,7 @@ class ProfileState extends State<Profile> with AfterInitMixin<Profile> {
         backgroundColor: colorDark,
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, Contacts.id);
+          Navigator.pushNamed(context, CreateContact.id);
         },
       ),
 
@@ -114,6 +115,8 @@ class ProfileState extends State<Profile> with AfterInitMixin<Profile> {
 Widget contactList(BuildContext context, List<TrustedContacts> contacts){
   return (contacts != null && contacts.length !=0)?
      ListView.builder(
+         shrinkWrap: true,
+       itemCount: contacts.length,
          itemBuilder:(BuildContext context, int index){
            final contact = contacts[index];
            return ListTile(

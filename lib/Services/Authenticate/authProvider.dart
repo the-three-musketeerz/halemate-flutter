@@ -104,6 +104,23 @@ class AuthProvider with ChangeNotifier {
     }
 }
 
+  Future<void> createContact(String name, String phone) async{
+    try{
+      int id = await getUserId();
+      Map<String, dynamic> body = {
+        'trusted_name':name,
+        'trusted_phone':phone,
+        'user':id.toString()
+      };
+      String token = await getToken();
+      String header = "token $token";
+      final response = await http.post(trustedContactAPI, headers: {"Authorization": header}, body: body);
+    }
+    catch(e){
+      print(e);
+    }
+  }
+
   Future<void> updateTrustedContact(List<TrustedContacts> contacts) async{
 
 
