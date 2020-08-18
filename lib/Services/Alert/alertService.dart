@@ -185,6 +185,15 @@ class _AlertWidgetState extends State<AlertWidget> {
           onPressed: () {
             getHospitals();
           },
+        ),
+        FlatButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: Text("Cancel Alert",
+            style: TextStyle(
+              color: Colors.red
+            ),)
         )
       ],
     );

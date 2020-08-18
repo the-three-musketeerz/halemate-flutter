@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hale_mate/Services/Appointment/appointmentProvider.dart';
 import 'package:hale_mate/Services/Authenticate/authProvider.dart';
 import 'package:hale_mate/constants.dart';
@@ -123,15 +124,26 @@ Widget appointmentList(BuildContext context, List<Appointment> appointments){
       itemCount: appointments.length
   )
   : Center(
-    child: Text(
-      'Press + to make new a new appointment',
+    child: Column(
+      children: <Widget>[
+        SizedBox(height: 50.0),
+        Text(
+          'Press  +  to make new a new appointment',
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 24,
               color: Colors.grey,
               fontWeight: FontWeight.bold
           ),
-    ),
-  );
+        ),
+        SizedBox(height: 50.0),
+        Image.asset(
+            "assets/appointment.jpg",
+
+          fit: BoxFit.fitWidth,
+        )
+      ],
+
+  ));
 
 }
