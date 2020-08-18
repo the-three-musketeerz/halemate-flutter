@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+
+List<TrustedContacts> contactsFromJson(String str) => new List<TrustedContacts>.from(
+    json.decode(str).map((x) => TrustedContacts.fromJson(x)));
+
 class User {
   int userId;
   String email;
@@ -30,6 +36,11 @@ class TrustedContacts {
   String contactNumber;
 
   TrustedContacts({this.contactName, this.contactNumber});
+
+  factory TrustedContacts.fromJson(Map<String, dynamic> json) => new TrustedContacts(
+    contactName: json['trusted_name'],
+    contactNumber: json['trusted_phone'],
+  );
 
   //encoding data into a json object to be sent to the server
   Map<String, dynamic> toJson() =>
