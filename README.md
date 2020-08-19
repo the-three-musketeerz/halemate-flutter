@@ -16,6 +16,9 @@ A Flutter application with various features to digitalize the functionality of h
     utils -> All utility functions like validators, routers, etc.
     base -> All common widgets necessary in the project like app bar, nav bar, etc.     
     
+## More details about the project
+   - [Google Drive link for the submission]https://drive.google.com/drive/folders/112dqU8nh0RJIK0kS2XQV4TfK0DIGZEzX
+    
 
 ## Commit messages:
 
