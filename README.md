@@ -2,6 +2,8 @@
 
 A Flutter application with various features to digitalize the functionality of healthcare domain.
 
+To know more about the project visit: https://www.youtube.com/watch?v=jmXZCjhPsJA&feature=youtu.be
+
 # Key Features
 
     Alert System -> Notifies all your trusted contacts and nearby hospitals when you need help
