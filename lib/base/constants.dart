@@ -11,7 +11,7 @@ const String userProfileAPI = '$baseAPI/user/';
 
 
 const String loginAPI = '$baseAPI/login/';
-const String trustedContactAPI = '$baseAPI/trusted_contact';
+const String trustedContactAPI = '$baseAPI/trusted_contact/';
 const String signupAPI = '$baseAPI/signup/';
 const String whoamiAPI = '$baseAPI/whoami/';
 const String forgotPasswordAPI = '$baseAPI/forgot_password/';

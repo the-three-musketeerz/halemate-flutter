@@ -140,6 +140,10 @@ class LogInFormState extends State<LogInForm> {
                           ),
                         ],
                       ),
-                    )))));
+                    )
+                )
+            )
+        )
+    );
   }
 }

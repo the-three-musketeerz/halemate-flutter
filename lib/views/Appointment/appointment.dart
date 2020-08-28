@@ -74,7 +74,9 @@ Widget appointmentList(BuildContext context, List<Appointment> appointments){
                 children: <Widget>[
                   ListTile(
                     //leading: Icon(Icons.local_hospital, color: Colors.red,size: 30,),
-                    title: Text(appointment.hospitalName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                    title: Text(appointment.hospitalName, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,),
+                    subtitle: Text(appointment.hospitalPhone, textAlign: TextAlign.center),
                   ),
                   ListTile(
                     leading: Icon(Icons.person),

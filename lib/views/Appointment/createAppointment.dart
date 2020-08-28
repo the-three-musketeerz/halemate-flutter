@@ -63,11 +63,11 @@ class _CreateAppointmentState extends State<CreateAppointment> with AfterInitMix
             icon: new Icon(Icons.arrow_back),
             onPressed: () => Navigator.pushNamed(context, MyScaffold.id),
           ),),
-      body: Container(
+      body: SingleChildScrollView(
+    child: Container(
         margin: EdgeInsets.all(25.0),
         child: Form(
           key: _formKey,
-          child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               //mainAxisAlignment: MainAxisAlignment.center,
@@ -157,7 +157,8 @@ class _CreateAppointmentState extends State<CreateAppointment> with AfterInitMix
             )
           ),
         ),
-      )
+
+    )
     );
   }
 }
