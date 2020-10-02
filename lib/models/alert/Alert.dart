@@ -1,5 +1,3 @@
-
-
 class Alert{
   String hospitalName;
   String hospitalAddress;

@@ -119,8 +119,6 @@ Widget appointmentList(BuildContext context, List<Appointment> appointments){
               )
             ),
           ),
-//          key: Key((appointment.id).toString()),
-//          title: Text(appointment.patientName),
         );
       },
       itemCount: appointments.length

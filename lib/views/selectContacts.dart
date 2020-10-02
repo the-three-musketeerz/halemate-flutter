@@ -1,4 +1,3 @@
-
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hale_mate/base/constants.dart';
@@ -12,7 +11,6 @@ class Contacts extends StatelessWidget {
     return MaterialApp(
       title: 'Select trusted contacts',
       home: SelectContactPage(title: 'Select Trusted Contacts'),
-
     );
   }
 }
@@ -37,6 +35,7 @@ class _MySelectedContactsState extends State<SelectContactPage> {
     super.initState();
     getPermissions();
   }
+
   getPermissions() async {
     if (await Permission.contacts.request().isGranted) {
       getAllContacts();
@@ -53,12 +52,7 @@ class _MySelectedContactsState extends State<SelectContactPage> {
   }
 
   getAllContacts() async {
-    List colors = [
-      Colors.green,
-      Colors.indigo,
-      Colors.yellow,
-      Colors.orange
-    ];
+    List colors = [Colors.green, Colors.indigo, Colors.yellow, Colors.orange];
     int colorIndex = 0;
     List<Contact> _contacts = (await ContactsService.getContacts()).toList();
     _contacts.forEach((contact) {
@@ -120,63 +114,52 @@ class _MySelectedContactsState extends State<SelectContactPage> {
               child: TextField(
                 controller: searchController,
                 decoration: InputDecoration(
-                  labelText: 'Search',
-                  border: new OutlineInputBorder(
-                    borderSide: new BorderSide(
-                      color: colorLight
-
-                    )
-                  ),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: colorLight
-                  )
-                ),
+                    labelText: 'Search',
+                    border: new OutlineInputBorder(
+                        borderSide: new BorderSide(color: colorLight)),
+                    prefixIcon: Icon(Icons.search, color: colorLight)),
               ),
             ),
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: isSearching == true ? contactsFiltered.length : contacts.length,
+                itemCount: isSearching == true
+                    ? contactsFiltered.length
+                    : contacts.length,
                 itemBuilder: (context, index) {
-                  Contact contact = isSearching == true ? contactsFiltered[index] : contacts[index];
-                  
-                  var baseColor = contactsColorMap[contact.displayName] as dynamic;
+                  Contact contact = isSearching == true
+                      ? contactsFiltered[index]
+                      : contacts[index];
+
+                  var baseColor =
+                      contactsColorMap[contact.displayName] as dynamic;
 
                   Color color1 = baseColor[800];
                   Color color2 = baseColor[400];
                   return ListTile(
-                    title: Text(contact.displayName),
-                    subtitle: Text(
-                      contact.phones.length > 0 ? contact.phones.elementAt(0).value : ''
-                    ),
-                    leading: (contact.avatar != null && contact.avatar.length > 0) ?
-                      CircleAvatar(
-                        backgroundImage: MemoryImage(contact.avatar),
-                      ) : 
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: LinearGradient(
-                            colors: [
-                              color1,
-                              color2,
-                            ],
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight
-                          )
-                        ),
-                        child: CircleAvatar(
-                          child: Text(
-                            contact.initials(),
-                            style: TextStyle(
-                              color: Colors.white
+                      title: Text(contact.displayName),
+                      subtitle: Text(contact.phones.length > 0
+                          ? contact.phones.elementAt(0).value
+                          : ''),
+                      leading: (contact.avatar != null &&
+                              contact.avatar.length > 0)
+                          ? CircleAvatar(
+                              backgroundImage: MemoryImage(contact.avatar),
                             )
-                          ),
-                          backgroundColor: Colors.transparent
-                        )
-                      )
-                  );
+                          : Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
+                                      colors: [
+                                        color1,
+                                        color2,
+                                      ],
+                                      begin: Alignment.bottomLeft,
+                                      end: Alignment.topRight)),
+                              child: CircleAvatar(
+                                  child: Text(contact.initials(),
+                                      style: TextStyle(color: Colors.white)),
+                                  backgroundColor: Colors.transparent)));
                 },
               ),
             )

@@ -113,19 +113,6 @@ class RegisterFormState extends State<RegisterForm> {
                           TextFormField(
                               obscureText: _obscureText,
                               decoration: AuthStyles.input.copyWith(
-                                  /* border: OutlineInputBorder(
-                                        gapPadding: 1.0,
-                                        borderSide: BorderSide(
-                                          color: Colors.grey[600],
-                                          width: 1.0,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: colorLight,
-                                          width: 2.0,
-                                        ),
-                                      ),*/
                                   hintText: 'Password',
                                   icon: Container(
                                       width: 15.0,

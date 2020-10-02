@@ -91,7 +91,7 @@ class AuthProvider with ChangeNotifier {
     return false;
   }
 
-  //Future<bool> updateTrustedContact : updated the list of trusted contacts
+  // updateTrustedContact : updated the list of trusted contacts
   //for that user
 
   Future<void> getContacts() async{
