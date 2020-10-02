@@ -45,6 +45,7 @@ class _AlertWidgetState extends State<AlertWidget> {
     }
   }
 
+  //gets all nearby hospitals in the range of 5 km radius
   Future<void> getHospitals() async{
     List hospitals = await reportAlert(_getCurrentLocation());
     if(hospitals!= null){
@@ -109,6 +110,7 @@ class _AlertWidgetState extends State<AlertWidget> {
     return currentPosition;
   }
 
+  //displays a list of all nearby hospitals
   Future<List> reportAlert(Position location) async {
 
     Map<String, String> body = {
@@ -129,8 +131,7 @@ class _AlertWidgetState extends State<AlertWidget> {
       return listJson;
   }
 
-  //post request to send alert to contacts and hospitals
-
+  //sends alert message to trusted contacts and hospitals
   Future<bool> sendAlertForMe(Position location) async {
     Map<String, String> body = {
       'lat': location.latitude.toString(),

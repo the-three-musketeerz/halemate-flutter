@@ -153,7 +153,6 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 onPressed: () {
                   attemptsLeft--;
                   verifyMyOTP();
-
                 },
               ),
               FlatButton(

@@ -17,6 +17,7 @@ class Hospital{
       this.phoneNumber
     });
 
+  //for decoding data in json format from the server
   factory Hospital.fromJson(Map<String, dynamic> json) => new Hospital(
     id:json['id'],
     name: json['name'],

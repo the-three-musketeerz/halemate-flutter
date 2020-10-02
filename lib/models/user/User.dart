@@ -37,6 +37,7 @@ class TrustedContacts {
 
   TrustedContacts({this.contactName, this.contactNumber});
 
+  //for decoding data in json format from the server
   factory TrustedContacts.fromJson(Map<String, dynamic> json) => new TrustedContacts(
     contactName: json['trusted_name'],
     contactNumber: json['trusted_phone'],
@@ -45,11 +46,4 @@ class TrustedContacts {
   //encoding data into a json object to be sent to the server
   Map<String, dynamic> toJson() =>
       {"trusted_name": contactName, "trusted_phone": contactNumber, };
-}
-
-class PassedData {
-  final String email;
-  final String phone;
-
-  PassedData(this.email, this.phone);
 }

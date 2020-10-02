@@ -32,6 +32,7 @@ class AuthProvider with ChangeNotifier {
 
   List<TrustedContacts> get contacts => _contacts;
 
+  //initialize the auth provider
   initAuthProvider() async {
     String token = await getToken();
     if (token != null) {
@@ -43,7 +44,7 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  //Future<void> getUser : sets the user profile from whoami API
+  //sets the user profile from whoami API
   Future<void> getUser() async {
     final url = whoamiAPI;
     String token = await getToken();
@@ -69,7 +70,7 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  //Future<bool> updateUserProfile : updates the profile involving medical
+  //updates the profile involving medical history
   Future<bool> updateUserMedicalRecord(String medicalHistory) async {
     final url = loginAPI; //needs to be changed
     String token = await getToken();
@@ -91,8 +92,7 @@ class AuthProvider with ChangeNotifier {
     return false;
   }
 
-  // updateTrustedContact : updated the list of trusted contacts
-  //for that user
+
 
   Future<void> getContacts() async{
     final url = trustedContactAPI;
@@ -112,6 +112,7 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
+  // updates the list of trusted contacts of the user
   Future<void> updateTrustedContact(List<TrustedContacts> contacts) async {
     Future<void> getContacts() async {
       final url = trustedContactAPI;
@@ -132,7 +133,7 @@ class AuthProvider with ChangeNotifier {
       }
     }
   }
-
+  // create a trusted contact
     Future<void> createContact(String name, String phone) async {
       try {
         int id = await getUserId();
@@ -151,7 +152,7 @@ class AuthProvider with ChangeNotifier {
       }
     }
 
-
+  // login into the app
     Future<bool> login(String email, String password) async {
       _status = Status.Authenticating;
       _notification = null;
@@ -193,6 +194,7 @@ class AuthProvider with ChangeNotifier {
       return false;
     }
 
+    //register as a user
     Future<Map> register(String name, String email, String password,
         String passwordConfirm, String phone) async {
       _notification = null;
@@ -253,6 +255,7 @@ class AuthProvider with ChangeNotifier {
       }
     }
 
+
     Future<bool> forgotPassword(String email) async {
       _notification = null;
       final url = forgotPasswordAPI;
@@ -275,6 +278,7 @@ class AuthProvider with ChangeNotifier {
       return false;
     }
 
+    //change the password if the user forgets it
     Future<bool> resetPassword(String email, String OTP,
         String newPassword) async {
       final url = resetPasswordAPI;
@@ -306,6 +310,7 @@ class AuthProvider with ChangeNotifier {
       }
     }
 
+    //change the password when the user remembers the old one
     Future<bool> changePassword(String oldPassword, String newPassword) async {
       final url = changePasswordAPI;
 
@@ -339,6 +344,7 @@ class AuthProvider with ChangeNotifier {
       }
     }
 
+    //OTP Verification
     Future<bool> sendOTP(String method, String email) async {
       _notification = null;
       final url = signupVerifyAPI;
@@ -400,6 +406,7 @@ class AuthProvider with ChangeNotifier {
       }
     }
 
+    //registers the device ID for FCM notifications
     Future<bool> registerDevice(dynamic fcmToken) async {
       final url = registerDeviceAPI;
 
@@ -428,6 +435,7 @@ class AuthProvider with ChangeNotifier {
       await storage.setInt('id', apiResponse['id']);
     }
 
+    //Get the header token for each api call
     Future<String> getToken() async {
       SharedPreferences storage = await SharedPreferences.getInstance();
       String token = storage.getString('token');
@@ -440,6 +448,7 @@ class AuthProvider with ChangeNotifier {
       return userId;
     }
 
+    //Log out of the app
     logOut([bool tokenExpired = false]) async {
       _status = Status.Unauthenticated;
       if (tokenExpired == true) {

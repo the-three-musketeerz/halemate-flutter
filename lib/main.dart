@@ -69,8 +69,6 @@ class _MedReminderState extends State<MedReminder> {
 }
 
 class NavigationRouter extends StatelessWidget {
-  //final authProvider = Provider.of<AuthProvider>();
-
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
