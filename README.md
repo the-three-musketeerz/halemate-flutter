@@ -20,6 +20,14 @@ To know more about the project visit: https://www.youtube.com/watch?v=jmXZCjhPsJ
     
 ## More details about the project
    - [Google Drive link for the submission]https://drive.google.com/drive/folders/112dqU8nh0RJIK0kS2XQV4TfK0DIGZEzX
+   - Backend made on Django framework
+   - Also there is a web portal designed for appointments booking system on React Framework 
+   
+## Setup Instructions
+    - Clone this repository 
+    - Import the project in Android Studio or VS code
+    - Clone the backend repository and run the server locally for API calls
+    - Now just run the app!:)
     
 
 ## Commit messages:
