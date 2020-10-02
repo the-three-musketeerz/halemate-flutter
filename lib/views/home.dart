@@ -8,7 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:webfeed/webfeed.dart';
 
 class HomeScreen extends StatefulWidget {
-
   static const String id = 'Home';
 
   @override
@@ -16,8 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,32 +30,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Icon(Icons.warning),
                   backgroundColor: Colors.red[500],
                   onPressed: () {
-                    showDialog(context: context,
+                    showDialog(
+                        context: context,
                         barrierDismissible: false,
                         builder: (BuildContext context) => AlertWidget());
                   }),
-            )
-        )
-    );
+            )));
   }
 }
 
-class RSSHealth extends StatefulWidget{
-  RSSHealth () : super();
+class RSSHealth extends StatefulWidget {
+  RSSHealth() : super();
 
   @override
   RSSHealthState createState() => RSSHealthState();
 }
 
 class RSSHealthState extends State<RSSHealth> {
-  static const String FEED_URL = 'https://health.economictimes.indiatimes.com/rss/topstories';
+  static const String FEED_URL =
+      'https://health.economictimes.indiatimes.com/rss/topstories';
   RssFeed _feed;
   GlobalKey<RefreshIndicatorState> _refreshKey;
 
   updateFeed(feed) {
-    if(this.mounted){
+    if (this.mounted) {
       setState(() {
-       _feed = feed;
+        _feed = feed;
       });
     }
   }
@@ -137,28 +134,26 @@ class RSSHealthState extends State<RSSHealth> {
             child: Container(
               height: 250,
               child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                elevation: 3,
-                margin: EdgeInsets.all(10),
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ListTile(
-                        title: title(item.title),
-                      ),
-                      ListTile(
-                        title: subtitle(item.description),
-                      )
-                    ],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
-                )
-
-              ),
+                  elevation: 3,
+                  margin: EdgeInsets.all(10),
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ListTile(
+                          title: title(item.title),
+                        ),
+                        ListTile(
+                          title: subtitle(item.description),
+                        )
+                      ],
+                    ),
+                  )),
             ),
-            onTap:() => openFeed(item.link),
+            onTap: () => openFeed(item.link),
           ),
         );
       },
@@ -172,21 +167,17 @@ class RSSHealthState extends State<RSSHealth> {
   body() {
     return isFeedEmpty()
         ? Center(
-      child: CircularProgressIndicator(),
-    )
+            child: CircularProgressIndicator(),
+          )
         : RefreshIndicator(
-      key: _refreshKey,
-      child: list(),
-      onRefresh: () => load(),
-    );
+            key: _refreshKey,
+            child: list(),
+            onRefresh: () => load(),
+          );
   }
 
   @override
   Widget build(BuildContext context) {
     return body();
   }
-
 }
-
-
-

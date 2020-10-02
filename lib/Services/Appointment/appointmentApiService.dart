@@ -21,16 +21,7 @@ class AppointmentApiService{
 
   final String api = appointmentAPI;
 
-//  void validateResponseStatus(int status, int validStatus) {
-//    if (status == 401) {
-//      throw new AuthException( "401", "Unauthorized" );
-//    }
-//
-//    if (status != validStatus) {
-//      throw new ApiException( status.toString(), "API Error" );
-//    }
-//  }
-
+  //shows the status of all previous appointments of the user
   Future<List<Appointment>> getAppointments() async{
     String token =  await authProvider.getToken();
     final response = await http.get(
@@ -46,6 +37,7 @@ class AppointmentApiService{
     return appointments;
   }
 
+  //shows list of all registered hospitals
   Future<List<Hospital>> getHospitals() async{
     final response = await http.get(
       hospitalAPI,
@@ -59,6 +51,7 @@ class AppointmentApiService{
     return hospitals;
   }
 
+  //displays custom list of doctors according to the hospital search
   Future<List<Doctor>> getDoctors(int id) async{
     final url = '$hospitalAPI$id/';
     final response = await http.get(

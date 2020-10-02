@@ -6,10 +6,7 @@ import 'package:hale_mate/base/myScaffold.dart';
 import 'package:hale_mate/utlis/router.dart';
 import 'package:hale_mate/views/Authenticate/login.dart';
 import 'package:hale_mate/views/alarm/alarm.dart';
-import 'package:hale_mate/views/home.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:hale_mate/views/profile.dart';
 
 void main() {
   runApp(HaleMateApp());
@@ -72,8 +69,6 @@ class _MedReminderState extends State<MedReminder> {
 }
 
 class NavigationRouter extends StatelessWidget {
-  //final authProvider = Provider.of<AuthProvider>();
-
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(

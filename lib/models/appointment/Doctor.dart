@@ -20,6 +20,7 @@ class Doctor{
   }
       );
 
+  //for decoding data in json format from the server
   factory Doctor.fromJson(Map<String, dynamic> json) => new Doctor(
     id: json['id'],
     name: json['name'],

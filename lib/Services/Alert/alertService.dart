@@ -45,13 +45,13 @@ class _AlertWidgetState extends State<AlertWidget> {
     }
   }
 
+  //gets all nearby hospitals in the range of 5 km radius
   Future<void> getHospitals() async{
     List hospitals = await reportAlert(_getCurrentLocation());
     if(hospitals!= null){
 
       this.setState(() {
         hospitalList.addAll(hospitals);
-        print(hospitalList[1]);
       });
       return showDialog(context: context,
       builder: (BuildContext context){
@@ -100,8 +100,6 @@ class _AlertWidgetState extends State<AlertWidget> {
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
         .then((Position position) async {
       if (position != null) {
-        print("Location: ${position.latitude},${position.longitude}");
-
         setState(() {
           currentPosition = position;
         });
@@ -112,6 +110,7 @@ class _AlertWidgetState extends State<AlertWidget> {
     return currentPosition;
   }
 
+  //displays a list of all nearby hospitals
   Future<List> reportAlert(Position location) async {
 
     Map<String, String> body = {
@@ -129,15 +128,10 @@ class _AlertWidgetState extends State<AlertWidget> {
         body: body);
 
       var listJson = jsonDecode(response.body);
-     //     .cast<Map<String, dynamic>>();
-      //var hospitalList = listJson.map<Alert>((json) => Alert.fromJson(json)).toList();
-      //print(hospitalList);
-    print(listJson[1]['hospitalName']);
       return listJson;
   }
 
-  //post request to send alert to contacts and hospitals
-
+  //sends alert message to trusted contacts and hospitals
   Future<bool> sendAlertForMe(Position location) async {
     Map<String, String> body = {
       'lat': location.latitude.toString(),
@@ -156,7 +150,6 @@ class _AlertWidgetState extends State<AlertWidget> {
     if (response.statusCode == 200) {
       return true;
     } else {
-      print("token = $token");
       throw Exception('Error!!');
     }
   }

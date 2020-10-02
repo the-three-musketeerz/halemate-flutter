@@ -37,6 +37,7 @@ class Validate {
     return null;
   }
 
+  //matches the password and then confirmed password
   static String passwordMatch(String value1, String value2){
     String passwordConfirm  = value1.trim();
     String password = value2.trim();
@@ -49,6 +50,7 @@ class Validate {
     return null;
   }
 
+  //validates phone number
   static String validatePhone(String value){
     String phone = value.trim();
     if (phone.isEmpty) {
