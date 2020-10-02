@@ -347,14 +347,6 @@ class _NewEntryState extends State<NewEntry> {
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
 
     for (int i = 0; i < (24 / medicine.interval).floor(); i++) {
-      /*if ((hour + (medicine.interval * i) > 23)) {
-        hour = hour + (medicine.interval * i) - 24;
-      } else {
-        hour = hour + (medicine.interval * i);
-      }*/
-      developer.log(medicine.notificationIDs[i].toString(), name: "notif id");
-      developer.log(hour.toString() + ":" + minute.toString(), name: "notif time");
-
 
       await flutterLocalNotificationsPlugin.showDailyAtTime(
           int.parse(medicine.notificationIDs[i].toString()),
@@ -364,8 +356,6 @@ class _NewEntryState extends State<NewEntry> {
               ? 'It is time to take your ${medicine.medicineType
               .toLowerCase()}, according to schedule'
               : 'It is time to take your medicine, according to schedule',
-
-          //'notification body',
           Time(hour, minute, 0),
           platformChannelSpecifics);
 
@@ -374,7 +364,6 @@ class _NewEntryState extends State<NewEntry> {
 
       hour = ogValue;
     }
-//await flutterLocalNotificationsPlugin.cancelAll();
   }
 
 }

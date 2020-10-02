@@ -144,8 +144,6 @@ class MedicineDetails extends StatelessWidget {
         });
   }
 }
-// _globalBloc.removeMedicine(medicine);
-//                       Navigator.of(context).pop()
 
 class MainSection extends StatelessWidget {
   final Medicine medicine;

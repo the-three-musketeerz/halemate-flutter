@@ -51,7 +51,6 @@ class _AlertWidgetState extends State<AlertWidget> {
 
       this.setState(() {
         hospitalList.addAll(hospitals);
-        print(hospitalList[1]);
       });
       return showDialog(context: context,
       builder: (BuildContext context){
@@ -100,8 +99,6 @@ class _AlertWidgetState extends State<AlertWidget> {
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
         .then((Position position) async {
       if (position != null) {
-        print("Location: ${position.latitude},${position.longitude}");
-
         setState(() {
           currentPosition = position;
         });
@@ -129,10 +126,6 @@ class _AlertWidgetState extends State<AlertWidget> {
         body: body);
 
       var listJson = jsonDecode(response.body);
-     //     .cast<Map<String, dynamic>>();
-      //var hospitalList = listJson.map<Alert>((json) => Alert.fromJson(json)).toList();
-      //print(hospitalList);
-    print(listJson[1]['hospitalName']);
       return listJson;
   }
 
@@ -156,7 +149,6 @@ class _AlertWidgetState extends State<AlertWidget> {
     if (response.statusCode == 200) {
       return true;
     } else {
-      print("token = $token");
       throw Exception('Error!!');
     }
   }

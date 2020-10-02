@@ -70,7 +70,6 @@ class _CreateAppointmentState extends State<CreateAppointment> with AfterInitMix
           key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              //mainAxisAlignment: MainAxisAlignment.center,
               children:<Widget>[
                 Text(
                   'New Appointment',
